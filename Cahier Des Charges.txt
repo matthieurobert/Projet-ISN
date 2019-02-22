@@ -1,0 +1,12 @@
+(Ceci n'est pas terminé donc vous pouvez le modifier )
+
+
+Matthieu: - déplacement des ennemies /collisions 
+
+Lilian: - déplacement du personnage et comptage du nombre de points de vie.
+
+Clément: - Positionnement aléatoire des obstacles/ennemies/cubes spéciaux
+
+		(choix de la difficulté avec plus ou moins de mobs et plus ou moins d'obstacles)
+
+	 
