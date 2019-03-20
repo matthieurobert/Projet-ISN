@@ -21,15 +21,12 @@ class ARBot(pygame.sprite.Sprite):
 		self.speed = [0, 5]
 		self.update()
 
-	#def reinit(self):
-		#self.state = "still"
-		#self.movepos = [0, 5]
 	
 	def update(self):
 		if self.rect.top < 0:
 			self.newpos[1] = self.newpos[1] + self.speed[1]
 			self.rect = self.rect.move(self.newpos)
-		#if self.area.contains(self.newpos):
+		
 		elif self.rect.bottom > 440:
 			self.newpos[1] = self.newpos[1] - self.speed[1]
 			self.rect = self.rect.move(self.newpos)
@@ -38,22 +35,41 @@ class ARBot(pygame.sprite.Sprite):
 			self.newpos[1] = self.newpos[1] + self.speed[1]
 			self.rect = self.rect.move(self.newpos)
 		
-		print(self.speed)
+		#print(self.speed)
+
+
+class LRBot(pygame.sprite.Sprite):
+	
+	
+
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.image.load("sprite2.png")
+		screen = pygame.display.get_surface()
+		self.area = screen.get_rect()
+		self.rect = self.image.get_rect()
+		#self.side = side
+		#self.speed = 10
+		self.state = "still"
+		self.newpos = [0, 0]
+		self.speed = [5, 0]
+		self.update()
+
+	
+	def update(self):
+		if self.rect.left < 0:
+			self.newpos[0] = self.newpos[0] + self.speed[0]
+			self.rect = self.rect.move(self.newpos)
 		
-
+		elif self.rect.right > 400:
+			self.newpos[0] = self.newpos[0] - self.speed[0]
+			self.rect = self.rect.move(self.newpos)
 		
-
-	#def moveup(self):
-		#self.movepos[1] = self.movepos[1] - (self.speed)
-		#self.state = "moveup"
+		else:
+			self.newpos[0] = self.newpos[0] + self.speed[0]
+			self.rect = self.rect.move(self.newpos)
 		
-	#def movedown(self):
-		#self.movepos[1] = self.movepos[1] + (self.speed)
-		#self.state = "movedown"
-
-
-
-speed = [0, 5]
+		#print(self.speed)
 
 fenetre = pygame.display.set_mode((600,640), RESIZABLE)
 
@@ -65,6 +81,7 @@ fenetre.blit(fond, (0 , 0))
 #fenetre.blit(player, pos_player)
 
 alien = ARBot()
+pab = LRBot()
 
 pygame.display.flip
 
@@ -79,7 +96,9 @@ while continuer:
 	#alien.update()
 	fenetre.blit(fond, (0, 0))
 	fenetre.blit( alien.image, alien.rect)
+	fenetre.blit( pab.image, pab.rect)
 	alien.update()
+	pab.update()
 	pygame.display.flip()
 
 		
