@@ -1,10 +1,10 @@
 def position_boîte():
     from coordonnées_aléatoire import répartition_obstacle
     from nombre_obstacle import nombre_caisse
-    from nombre_obstacle import nombre_caisse_spe
     from random import randrange
 
     nombres = nombre_caisse()
+
 
     coordonnee = répartition_obstacle()
     modif_coordonnee = []
