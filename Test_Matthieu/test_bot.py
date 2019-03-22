@@ -58,7 +58,7 @@ class LRBot(pygame.sprite.Sprite):
 			self.newpos[0] = self.newpos[0] + self.speed[0]
 			self.rect = self.rect.move(self.newpos)
 		
-		elif self.rect.right > 400:
+		elif self.rect.right > 440:
 			self.newpos[0] = self.newpos[0] - self.speed[0]
 			self.rect = self.rect.move(self.newpos)
 		
@@ -68,7 +68,7 @@ class LRBot(pygame.sprite.Sprite):
 		
 		#print(self.speed)
 
-fenetre = pygame.display.set_mode((600,640), RESIZABLE)
+fenetre = pygame.display.set_mode((640,640), RESIZABLE)
 
 fond = pygame.image.load("background.png")
 fenetre.blit(fond, (0 , 0))
