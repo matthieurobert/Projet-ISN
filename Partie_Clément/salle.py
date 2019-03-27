@@ -33,8 +33,5 @@ def salle():
 
 
 salle()
-k=1
-while k==1:
-    k = int(input())
 
 
