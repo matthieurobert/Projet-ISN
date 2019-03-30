@@ -1,5 +1,8 @@
+import pygame
+
 def rekt():
-    from pos_boîte import position_boîte
+    
+    from Partie_Clément.pos_boîte import position_boîte
 
     a=position_boîte()
     newliste=[]
@@ -10,6 +13,6 @@ def rekt():
         recup = a[x]
         recup1=recup[0]
         recup2=recup[1]
-
-        rekt_caisse.append([recup1,recup2,50,50])
+        rect = pygame.Rect(recup1,recup2,50,50)
+        rekt_caisse.append(rect)
     return(rekt_caisse)

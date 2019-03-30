@@ -1,6 +1,6 @@
 def position_boîte():
-    from coordonnées_aléatoire import répartition_obstacle
-    from nombre_obstacle import nombre_caisse
+    from Partie_Clément.coordonnées_aléatoire import répartition_obstacle
+    from Partie_Clément.nombre_obstacle import nombre_caisse
     from random import randrange
 
     nombres = nombre_caisse()
