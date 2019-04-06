@@ -175,7 +175,7 @@ while continuer:
 		if event.type == pygame.QUIT: sys.exit()
 
 	
-	#alien.update()
+	
 	fenetre.blit(fond, (0, 0))
 	fenetre.blit( alien.image, alien.rect)
 	fenetre.blit( pab.image, pab.rect)

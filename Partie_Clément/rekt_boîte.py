@@ -15,4 +15,5 @@ def rekt():
         recup2=recup[1]
         rect = pygame.Rect(recup1,recup2,50,50)
         rekt_caisse.append(rect)
+    
     return(rekt_caisse)

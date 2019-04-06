@@ -1,0 +1,12 @@
+#def update(self):
+		if self.rect.top < 0:
+			self.newpos[1] = self.newpos[1] + self.speed[1]
+			self.rect = self.rect.move(self.newpos)
+		
+		elif self.rect.bottom > 440:
+			self.newpos[1] = self.newpos[1] - self.speed[1]
+			self.rect = self.rect.move(self.newpos)
+		
+		else:
+			self.newpos[1] = self.newpos[1] + self.speed[1]
+			self.rect = self.rect.move(self.newpos)
