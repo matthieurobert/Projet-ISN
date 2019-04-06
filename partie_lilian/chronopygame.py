@@ -41,10 +41,8 @@ while continuer1:
 
 
 
-
-
     pygame.display.flip()
-
+conteur = conteur - 2
 while continuer2:
     for evenement in pygame.event.get():
         if evenement.type == QUIT:
@@ -52,13 +50,16 @@ while continuer2:
             continuer2 = 0
 
             pygame.display.quit()
-
-    hello_texte_surface = arial_font.render("Score : "+chiffre, True, blue)
+    carre_noir = pygame.Rect(10,10, 150, 30)
+    pygame.draw.rect(fen, black, carre_noir)
+    
+    score_finale=str(conteur)
+    hello_texte_surface = arial_font.render("Score : "+score_finale, True, blue)
 
     perso = pygame.image.load("gameover.jpg")
 
     fen.blit(perso, (10,10))
-    fen.blit(hello_texte_surface,(10,20))
+    fen.blit(hello_texte_surface,(435,500))
 
     pygame.font.init()
     pygame.display.flip()

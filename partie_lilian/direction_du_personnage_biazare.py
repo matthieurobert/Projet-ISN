@@ -17,7 +17,6 @@ fenetre.blit(perso, position_perso)
 
 #Rafraîchissement de l'écran
 pygame.display.flip()
-pygame.key.set_repeat(50, 15)
 
 #BOUCLE INFINIE
 continuer = 1
@@ -26,25 +25,12 @@ while continuer:
 		if event.type == QUIT:
 			continuer = 0
 		if event.type == KEYDOWN:
-			if event.key == K_d:	#Si "flèche bas"
+			if event.key == K_DOWN:	#Si "flèche bas"
 				#On descend le perso
-				position_perso = position_perso.move(0,6)
-		if event.type == KEYDOWN:
-			if event.key == K_e:	#Si "flèche haut"
-				#On monte le perso
-				position_perso = position_perso.move(0,-6)
-		if event.type == KEYDOWN:
-			if event.key == K_f:	#Si "flèche de droite"
-				#On fait déplacer notre personnonage vers la droit
-				position_perso = position_perso.move(6,0)
-		if event.type == KEYDOWN:
-			if event.key == K_s:	#Si "flèche de gauche"
-				#On fait déplacer notre personnonage vers la gauche
-				position_perso = position_perso.move(-6,0)
-#Re-collage
-	fenetre.blit(fond, (0,0))
+				position_perso = position_perso.move(0,3)
+	
+	#Re-collage
+	fenetre.blit(fond, (0,0))	
 	fenetre.blit(perso, position_perso)
 	#Rafraichissement
 	pygame.display.flip()
-#BOUTON POUR SE DIRIGER E haut D bat S gauche F droit
-	
