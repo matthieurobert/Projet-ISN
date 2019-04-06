@@ -5,6 +5,8 @@ def salle():
     from random import randrange
     from Partie_Clément.pos_boîte import position_boîte
 
+
+
     position_x_y = position_boîte()
     caisses=len (position_x_y)
 
@@ -31,7 +33,8 @@ def salle():
     pygame.display.flip()
 
     liste = [fenetre, table, caisse, caisses, position_x_y]
-    return liste
+
+    return (liste)
 
 
 
