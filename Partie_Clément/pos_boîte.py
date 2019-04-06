@@ -1,6 +1,6 @@
 def position_boîte():
-    from Partie_Clément.coordonnées_aléatoire import répartition_obstacle
-    from Partie_Clément.nombre_obstacle import nombre_caisse
+    from  Partie_Clément.coordonnées_aléatoire import répartition_obstacle
+    from  Partie_Clément.nombre_obstacle import nombre_caisse
     from random import randrange
 
     nombres = nombre_caisse()
@@ -13,8 +13,8 @@ def position_boîte():
     for x in range (0,nombres,1):
 
 
-        randx = randrange(-50,51)
-        randy = randrange(-50,51)
+        randx = randrange(-25,25)
+        randy = randrange(-25,25)
 
         recuperateur = []
         recuperateur = coordonnee[x]
