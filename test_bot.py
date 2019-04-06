@@ -37,17 +37,15 @@ class ARBot(pygame.sprite.Sprite):
 
 
 	def update(self):
-		if self.rect.top < 0:
-			self.newpos[1] = self.newpos[1] + self.speed[1]
-			self.rect = self.rect.move(self.newpos)
+		if self.rect.left < 0 or self.rect.right > 1095:
+			self.speed[1] = -self.speed[1]
 
-		elif self.rect.bottom > 670:
-			self.newpos[1] = self.newpos[1] - self.speed[1]
-			self.rect = self.rect.move(self.newpos)
+		for d in range (0,len(rekt_boîte)):
 
-		else:
-			self.newpos[1] = self.newpos[1] + self.speed[1]
-			self.rect = self.rect.move(self.newpos)
+			if self.rect.colliderect(rekt_boîte[d]):
+				self.speed[1] = -self.speed[1]
+
+		self.rect = self.rect.move(self.speed)
 
 		#print(self.speed)
 
