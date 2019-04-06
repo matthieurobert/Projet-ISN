@@ -14,7 +14,7 @@ caisse = liste[2]
 caisses = liste[3]
 position_x_y = liste[4]
 
-
+print(rekt_boîte)
 class ARBot(pygame.sprite.Sprite):
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
@@ -65,24 +65,17 @@ class LRBot(pygame.sprite.Sprite):
 
 	
 	def update(self):
-		
+		if self.rect.left < 0 or self.rect.right > 1095:
+			self.speed[0] = -self.speed[0]
 
-		if self.rect.left < 0 :
-			self.newpos[0] = self.newpos[0] + self.speed[0]
-			self.rect = self.rect.move(self.newpos)
-		
-		elif self.rect.right > 1095:
-			self.newpos[0] = self.newpos[0] - self.speed[0]
-			self.rect = self.rect.move(self.newpos)
-		
-		elif self.rect.collidelist(rekt_boîte):
-			self.newpos[0] = self.newpos[0] - self.speed[0]
-			self.rect = self.rect.move(self.newpos)
-		
-		else:
-			self.newpos[0] = self.newpos[0] + self.speed[0]
-			self.rect = self.rect.move(self.newpos)
-		
+		for d in range (0,len(rekt_boîte)):
+			
+			if self.rect.colliderect(rekt_boîte[d]):
+				self.speed[0] = -self.speed[0]
+
+		self.rect = self.rect.move(self.speed)
+
+
 		#print(self.speed)
 
 
