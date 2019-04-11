@@ -29,7 +29,7 @@ while continuer1:
 
     depart=time.time()
     conteur =int(depart-temps)
-    time.sleep(1)
+    
     chiffre=str(conteur)
     myrect = pygame.Rect(10,10, 150, 30)
     pygame.draw.rect(fen, black, myrect)
@@ -42,7 +42,7 @@ while continuer1:
 
 
     pygame.display.flip()
-conteur = conteur - 2
+
 while continuer2:
     for evenement in pygame.event.get():
         if evenement.type == QUIT:

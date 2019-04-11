@@ -82,16 +82,19 @@ class LRBot(pygame.sprite.Sprite):
 		#print(self.speed)
 
 perso = pygame.image.load("perso.jpg").convert()
-x=10
-y=10
-speed = 6
+position_perso = perso.get_rect()
+
+speed =8
+repouser = speed +1 
 speed_diagonal = speed/2
 time = 80
-fenetre.blit(perso, (x,y))
+hauteur_x = 1100
+hauteur_y= 675
+fenetre.blit(perso, position_perso)
 clock = pygame.time.Clock()
 pygame.display.flip()
 continuer = 0
-pygame.key.set_repeat(25,20)
+pygame.key.set_repeat(50,15)
 
 alien = ARBot()
 pab = LRBot()
@@ -116,7 +119,7 @@ while continuer:
 
     fenetre.blit( alien.image, alien.rect)
     fenetre.blit( pab.image, pab.rect)
-
+    fenetre.blit(perso,position_perso)
     pab.update()
 
     pygame.display.flip()
@@ -131,61 +134,86 @@ while continuer:
             pygame.quit()
         if  key[pygame.K_a] :
             clock.tick(time)             # gauche
-            fenetre.blit(fond, (0,0))
-            x = x-speed
-            fenetre.blit(perso, (x,y))
+            position_perso = position_perso.move(-speed,0)
+            for d in range (0,len(rekt_boîte)):
+                if position_perso.colliderect(rekt_boîte[d]):
+                    position_perso = position_perso.move(repouser,0)
+
+
+            if position_perso[0]<0:
+                position_perso = position_perso.move(speed,0)
+            if position_perso[0]>hauteur_x:
+                position_perso = position_perso.move(-speed,0)
+            if position_perso[1]<0:
+                position_perso = position_perso.move(0,speed)
+            if position_perso[1]>hauteur_y:
+                position_perso = position_perso.move(0,-speed)
+    
+            
+            fenetre.blit(perso, position_perso)
             pygame.display.flip()
 
         if  key[pygame.K_d] :
             clock.tick(time)                   #droite
-            fenetre.blit(fond, (0,0))
-            x = x+speed
-            fenetre.blit(perso, (x,y))
+            position_perso = position_perso.move(speed,0)
+            for d in range (0,len(rekt_boîte)):
+                if position_perso.colliderect(rekt_boîte[d]):
+                    position_perso = position_perso.move(-repouser,0)
+                
+            if position_perso[0]<0:
+                position_perso = position_perso.move(speed,0)
+            if position_perso[0]>hauteur_x:
+                position_perso = position_perso.move(-speed,0)
+            if position_perso[1]<0:
+                position_perso = position_perso.move(0,speed)
+            if position_perso[1]>hauteur_y:
+                position_perso = position_perso.move(0,-speed)
+
+
+            fenetre.blit(perso, position_perso)
             pygame.display.flip()
 
         if  key[pygame.K_w] :
             clock.tick(time)                      # monter
-            fenetre.blit(fond, (0,0))
-            y = y-speed
-            fenetre.blit(perso, (x,y))
+            position_perso = position_perso.move(0,-speed)
+            for d in range (0,len(rekt_boîte)):
+                if position_perso.colliderect(rekt_boîte[d]):
+                    position_perso = position_perso.move(0,repouser)
+                
+            if position_perso[0]<0:
+                position_perso = position_perso.move(speed,0)
+            if position_perso[0]>hauteur_x:
+                position_perso = position_perso.move(-speed,0)
+            if position_perso[1]<0:
+                position_perso = position_perso.move(0,speed)
+            if position_perso[1]>hauteur_y:
+                position_perso = position_perso.move(0,-speed)
+
+
+            fenetre.blit(perso, position_perso)
             pygame.display.flip()
 
         if  key[pygame.K_s] :
-            clock.tick(time)                     #décendre
-            fenetre.blit(fond, (0,0))
-            y = y+speed
-            fenetre.blit(perso, (x,y))
+            clock.tick(time)  
+                                                  #décendre
+            position_perso = position_perso.move(0,speed)
+            for d in range (0,len(rekt_boîte)):                                           
+                if position_perso.colliderect(rekt_boîte[d]):
+                    position_perso = position_perso.move(0,-repouser)
+                
+            if position_perso[0]<0:
+                position_perso = position_perso.move(speed,0)
+            if position_perso[0]>hauteur_x:
+                position_perso = position_perso.move(-speed,0)
+            if position_perso[1]<0:
+                position_perso = position_perso.move(0,speed)
+            if position_perso[1]>hauteur_y:
+                position_perso = position_perso.move(0,-speed)
+            
+            fenetre.blit(perso,position_perso)
             pygame.display.flip()
 
-        if  key[pygame.K_s] and key[pygame.K_a]   :
-            clock.tick(time)
-            fenetre.blit(fond, (0,0))
-            y = y+speed_diagonal
-            x=x-speed_diagonal
-            fenetre.blit(perso, (x,y))
+
             pygame.display.flip()
 
-        if  key[pygame.K_s] and key[pygame.K_d] :
-            clock.tick(time)
-            fenetre.blit(fond, (0,0))
-            y = y+speed_diagonal
-            x= x+speed_diagonal
-            fenetre.blit(perso, (x,y))
-            pygame.display.flip()
-
-        if  key[pygame.K_w] and key[pygame.K_d] :
-            clock.tick(time)
-            fenetre.blit(fond, (0,0))
-            y = y-speed_diagonal
-            x=x+speed_diagonal
-            fenetre.blit(perso, (x,y))
-            pygame.display.flip()
-
-        if  key[pygame.K_w] and key[pygame.K_a] :
-            clock.tick(time)
-            fenetre.blit(fond, (0,0))
-            y = y-speed_diagonal
-            x=x-speed_diagonal
-            fenetre.blit(perso, (x,y))
-            pygame.display.flip()
 

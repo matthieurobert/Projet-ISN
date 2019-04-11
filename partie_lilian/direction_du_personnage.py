@@ -31,7 +31,7 @@ while continuer:
 			if event.key == K_s:
 				#On descend le perso
 				position_perso = position_perso.move(0,6)
-				print("bas")
+				print(position_perso[0])
 			if event.key == K_w:
 				#On monte le perso
 				position_perso = position_perso.move(0,-6)
