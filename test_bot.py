@@ -1,7 +1,9 @@
 import pygame
 import sys
+import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
+
 
 pygame.init()
 
@@ -84,10 +86,25 @@ class LRBot(pygame.sprite.Sprite):
 perso = pygame.image.load("perso.jpg").convert()
 position_perso = perso.get_rect()
 
-speed =8
+
+blue = (255, 255, 255)
+black = (0, 0, 0)
+rouge = (255,25,0)
+white = (255,255,255)
+depart = int(time.time())
+temps = time.time()
+conteur =int(temps-depart)
+chiffre=str(conteur)
+myrect = pygame.Rect(10,10, 150, 30)
+arial_font = pygame.font.SysFont("arial",30)
+hello_texte_surface = arial_font.render("Score : "+chiffre, True, black)
+fenetre.blit(hello_texte_surface,(10,10))
+
+
+speed =4
 repouser = speed +1 
 speed_diagonal = speed/2
-time = 80
+ips = 60
 hauteur_x = 1100
 hauteur_y= 675
 fenetre.blit(perso, position_perso)
@@ -102,8 +119,9 @@ pab = LRBot()
 pygame.display.flip
 
 continuer = 1
-
+continuer2 = 1
 while continuer:
+   
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -120,20 +138,32 @@ while continuer:
     fenetre.blit( alien.image, alien.rect)
     fenetre.blit( pab.image, pab.rect)
     fenetre.blit(perso,position_perso)
+    fenetre.blit(hello_texte_surface,(10,10))
     pab.update()
 
     pygame.display.flip()
 
 
+    temps = time.time()
+    conteur =int(temps-depart)
+    chiffre=str(conteur)
+    myrect = pygame.Rect(10,10, 150, 30)
+    
+
+    arial_font = pygame.font.SysFont("arial",30)
+
+    hello_texte_surface = arial_font.render("Score : "+chiffre, True, black)
+    fenetre.blit(hello_texte_surface,(10,10))
+
     for event in pygame.event.get():
         key=pygame.key.get_pressed()
-            
+        fenetre.blit(hello_texte_surface,(10,10))    
 
         if event.type == QUIT:
             continuer = 1
             pygame.quit()
         if  key[pygame.K_a] :
-            clock.tick(time)             # gauche
+            clock.tick(ips)             # gauche
             position_perso = position_perso.move(-speed,0)
             for d in range (0,len(rekt_boîte)):
                 if position_perso.colliderect(rekt_boîte[d]):
@@ -150,11 +180,11 @@ while continuer:
                 position_perso = position_perso.move(0,-speed)
     
             
-            fenetre.blit(perso, position_perso)
+            fenetre.blit(perso, position_perso)           
             pygame.display.flip()
 
         if  key[pygame.K_d] :
-            clock.tick(time)                   #droite
+            clock.tick(ips)                   #droite
             position_perso = position_perso.move(speed,0)
             for d in range (0,len(rekt_boîte)):
                 if position_perso.colliderect(rekt_boîte[d]):
@@ -170,11 +200,11 @@ while continuer:
                 position_perso = position_perso.move(0,-speed)
 
 
-            fenetre.blit(perso, position_perso)
+            fenetre.blit(perso, position_perso)             
             pygame.display.flip()
 
         if  key[pygame.K_w] :
-            clock.tick(time)                      # monter
+            clock.tick(ips)                      # monter
             position_perso = position_perso.move(0,-speed)
             for d in range (0,len(rekt_boîte)):
                 if position_perso.colliderect(rekt_boîte[d]):
@@ -190,11 +220,11 @@ while continuer:
                 position_perso = position_perso.move(0,-speed)
 
 
-            fenetre.blit(perso, position_perso)
+            fenetre.blit(perso, position_perso)             
             pygame.display.flip()
 
         if  key[pygame.K_s] :
-            clock.tick(time)  
+            clock.tick(ips)  
                                                   #décendre
             position_perso = position_perso.move(0,speed)
             for d in range (0,len(rekt_boîte)):                                           
@@ -210,7 +240,7 @@ while continuer:
             if position_perso[1]>hauteur_y:
                 position_perso = position_perso.move(0,-speed)
             
-            fenetre.blit(perso,position_perso)
+            fenetre.blit(perso,position_perso)           
             pygame.display.flip()
 
 
