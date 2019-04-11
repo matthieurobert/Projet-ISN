@@ -83,7 +83,38 @@ class LRBot(pygame.sprite.Sprite):
 
 		#print(self.speed)
 
-perso = pygame.image.load("perso.jpg").convert()
+
+
+class FolBot(pygame.sprite.Sprite):
+
+
+
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.image.load("Test_Matthieu/sprite2.png")
+		screen = pygame.display.get_surface()
+		self.area = screen.get_rect()
+		self.rect = pygame.Rect(400,200,50,50)
+		#self.side = side
+		#self.speed = 10
+		self.state = "still"
+	
+		
+
+	def bas(self):
+		self.rect = self.rect.move(0, 1)
+
+	def haut(self):
+		self.rect = self.rect.move(0, -1)
+	
+	def gauche(self):
+		self.rect = self.rect.move(-1, 0)
+
+	def droite(self):
+		self.rect = self.rect.move(1, 0)
+
+
+perso = pygame.image.load("perso.jpg").convert
 position_perso = perso.get_rect()
 
 
@@ -115,6 +146,7 @@ pygame.key.set_repeat(50,15)
 
 alien = ARBot()
 pab = LRBot()
+follower = FolBot()
 
 pygame.display.flip
 
@@ -134,6 +166,8 @@ while continuer:
         x= b[0]
         y= b[1]
         fenetre.blit(caisse, (x,y))
+    #if position_perso[0] - follower.rect[0] < position_perso[1] - follower.rect[1]:
+    #    follower.haut() 
 
     fenetre.blit( alien.image, alien.rect)
     fenetre.blit( pab.image, pab.rect)
