@@ -3,9 +3,9 @@
 
 Matthieu: - déplacement des ennemies /collisions 
 
-Lilian: - déplacement du personnage et comptage du nombre de points de vie.
+Lilian: - déplacement du personnage et comptage du nombre de points de vie/ score/ cube spéciaux
 
-Clément: - Positionnement aléatoire des obstacles/ennemies/cubes spéciaux
+Clément: - Positionnement aléatoire des obstacles/ennemies
 
 		(choix de la difficulté avec plus ou moins de mobs et plus ou moins d'obstacles)
 
