@@ -162,6 +162,7 @@ while continuer :
     while continuer2:
    
 
+<<<<<<< HEAD
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -187,6 +188,38 @@ while continuer :
     
     
         pab.update()
+=======
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+
+    if abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
+        if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
+            follower.gauche()
+        else:
+            follower.droite()
+    elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
+        if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
+            follower.haut()
+        else:
+            follower.bas()
+
+
+ #alien.update()
+    fenetre.blit(table, (0, 0))
+    for i in range (0,caisses):
+        b=position_x_y[i]
+        x= b[0]
+        y= b[1]
+        fenetre.blit(caisse, (x,y))
+
+    fenetre.blit( alien.image, alien.rect)
+    fenetre.blit( pab.image, pab.rect)
+    fenetre.blit(perso,position_perso)
+    fenetre.blit(hello_texte_surface,(10,10))
+    fenetre.blit( follower.image, follower.rect)
+    pab.update()
+>>>>>>> e4d89ebc436b59ccc054c8adc51be1e8a92a6eb7
 
         pygame.display.flip()
 
