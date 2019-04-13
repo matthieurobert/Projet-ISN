@@ -1,37 +1,24 @@
-class Bat(pygame.sprite.Sprite):
-    """Movable tennis 'bat' with which one hits the ball
-    Returns: bat object
-    Functions: reinit, update, moveup, movedown
-    Attributes: which, speed"""
+import pygame
+from pygame.locals import *
+def murs_colision(speed,position_perso) :
+    hauteur_x = 1100
+    hauteur_y= 675
+    if position_perso[0]<0:
+        position_perso = position_perso.move(speed,0)
+    if position_perso[0]>hauteur_x:
+        position_perso = position_perso.move(-speed,0)
+    if position_perso[1]<0:
+        position_perso = position_perso.move(0,speed)
+    if position_perso[1]>hauteur_y:
+        position_perso = position_perso.move(0,-speed)
+    return position_perso
 
-    def __init__(self, side):
-        pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_png('perso.bmp')
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
-        self.side = side
-        self.speed = 10
-        self.state = "still"
-        self.reinit()
+def game_over(chiffre) :
+    black = (0,0,0)
+    arial_font = pygame.font.SysFont("arial",30)
+    afichage_score_final = arial_font.render("Score : "+chiffre, True, black)
 
-    def reinit(self):
-        self.state = "still"
-        self.movepos = [0,0]
-        if self.side == "left":
-            self.rect.midleft = self.area.midleft
-        elif self.side == "right":
-            self.rect.midright = self.area.midright
-
-    def update(self):
-        newpos = self.rect.move(self.movepos)
-        if self.area.contains(newpos):
-            self.rect = newpos
-        pygame.event.pump()
-
-    def moveup(self):
-        self.movepos[1] = self.movepos[1] - (self.speed)
-        self.state = "moveup"
-
-    def movedown(self):
-        self.movepos[1] = self.movepos[1] + (self.speed)
-        self.state = "movedown"
+    image_game_over = pygame.image.load("partie_lilian\gameover.jpg").convert_alpha()
+    information_game_over = [afichage_score_final,image_game_over]
+    return information_game_over
+    
