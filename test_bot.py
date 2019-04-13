@@ -132,8 +132,9 @@ hello_texte_surface = arial_font.render("Score : "+chiffre, True, black)
 image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 image_coeur3 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-
-point_vie = 3
+image_coeur4 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
+image_coeur5 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
+point_vie = 5
 chaine_vie = str(point_vie)
 image_vie = arial_font.render(" x "+chaine_vie,True, black)
 
@@ -160,7 +161,20 @@ continuer2 = 1
 continuer3 = 1
 while continuer :
     while continuer2:
-   
+        for event in pygame.event.get():
+          if event.type == pygame.QUIT:
+                pygame.quit()
+
+        if abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
+            if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
+                follower.gauche()
+            else:
+                follower.droite()
+        elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
+            if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
+                follower.haut()
+            else:
+                follower.bas()
 
 
         for event in pygame.event.get():
@@ -175,18 +189,22 @@ while continuer :
            y= b[1]
            fenetre.blit(caisse, (x,y))
         if point_vie>=1:
-            fenetre.blit(image_coeur1,(1010,8))
+            fenetre.blit(image_coeur1,(934,8))
             if point_vie>=2:
-                fenetre.blit(image_coeur2,(1048,8))
+                fenetre.blit(image_coeur2,(972,8))
                 if point_vie>=3:
-                    fenetre.blit(image_coeur3,(1086,8))
+                    fenetre.blit(image_coeur3,(1010,8))
+                    if point_vie>=4:
+                        fenetre.blit(image_coeur4,(1045,8))
+                        if point_vie>=5:
+                            fenetre.blit(image_coeur5,(1080,8))
 
         fenetre.blit( alien.image, alien.rect)
         fenetre.blit( pab.image, pab.rect)
         fenetre.blit(perso,position_perso)
         fenetre.blit(hello_texte_surface,(500,5))
-    
-    
+        fenetre.blit( follower.image, follower.rect)
+  
         pab.update()
 
 
