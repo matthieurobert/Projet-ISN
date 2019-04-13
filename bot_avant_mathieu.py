@@ -162,7 +162,7 @@ while continuer :
     while continuer2:
    
 
-<<<<<<< HEAD
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -188,38 +188,7 @@ while continuer :
     
     
         pab.update()
-=======
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
 
-    if abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
-        if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
-            follower.gauche()
-        else:
-            follower.droite()
-    elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
-        if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
-            follower.haut()
-        else:
-            follower.bas()
-
-
- #alien.update()
-    fenetre.blit(table, (0, 0))
-    for i in range (0,caisses):
-        b=position_x_y[i]
-        x= b[0]
-        y= b[1]
-        fenetre.blit(caisse, (x,y))
-
-    fenetre.blit( alien.image, alien.rect)
-    fenetre.blit( pab.image, pab.rect)
-    fenetre.blit(perso,position_perso)
-    fenetre.blit(hello_texte_surface,(10,10))
-    fenetre.blit( follower.image, follower.rect)
-    pab.update()
->>>>>>> e4d89ebc436b59ccc054c8adc51be1e8a92a6eb7
 
         pygame.display.flip()
 
@@ -236,69 +205,69 @@ while continuer :
     
 
         for event in pygame.event.get():
-            key=pygame.key.get_pressed()
-        
-        
-
+   
             if event.type == QUIT:
                 continuer = 1
                 pygame.quit()
-            if  key[pygame.K_a] :
-                clock.tick(ips)             # gauche
-                position_perso = position_perso.move(-speed,0)
-                for d in range (0,len(rekt_boîte)):
-                    if position_perso.colliderect(rekt_boîte[d]):
-                        position_perso = position_perso.move(repouser,0)
             
-                position_perso = murs_colision(speed,position_perso)   
+            if  event.type == KEYDOWN :
+                if event.key == K_a:
+                    clock.tick(ips)             # gauche
+                    position_perso = position_perso.move(-speed,0)
+                    for d in range (0,len(rekt_boîte)):
+                        if position_perso.colliderect(rekt_boîte[d]):
+                            position_perso = position_perso.move(repouser,0)
             
-                fenetre.blit(perso, position_perso)           
-                pygame.display.flip()
+                    position_perso = murs_colision(speed,position_perso)   
+            
+                    fenetre.blit(perso, position_perso)           
+                    pygame.display.flip()
 
-            if  key[pygame.K_d] :
-                clock.tick(ips)                   #droite
-                position_perso = position_perso.move(speed,0)
-                for d in range (0,len(rekt_boîte)):
-                    if position_perso.colliderect(rekt_boîte[d]):
-                        position_perso = position_perso.move(-repouser,0)
+                if event.key == K_d:
+                    clock.tick(ips)                   #droite
+                    position_perso = position_perso.move(speed,0)
+                    for d in range (0,len(rekt_boîte)):
+                        if position_perso.colliderect(rekt_boîte[d]):
+                            position_perso = position_perso.move(-repouser,0)
                 
-                position_perso = murs_colision(speed,position_perso) 
+                    position_perso = murs_colision(speed,position_perso) 
 
 
-                fenetre.blit(perso, position_perso)             
-                pygame.display.flip()
+                    fenetre.blit(perso, position_perso)             
+                    pygame.display.flip()
 
-            if  key[pygame.K_w] :
-                clock.tick(ips)                      # monter
-                position_perso = position_perso.move(0,-speed)
-                for d in range (0,len(rekt_boîte)):
-                    if position_perso.colliderect(rekt_boîte[d]):
-                        position_perso = position_perso.move(0,repouser)
+                if event.key == K_w:
+                    clock.tick(ips)                      # monter
+                    position_perso = position_perso.move(0,-speed)
+                    for d in range (0,len(rekt_boîte)):
+                        if position_perso.colliderect(rekt_boîte[d]):
+                            position_perso = position_perso.move(0,repouser)
                
-                position_perso = murs_colision(speed,position_perso) 
+                    position_perso = murs_colision(speed,position_perso) 
 
-                fenetre.blit(perso, position_perso)             
-                pygame.display.flip()
+                    fenetre.blit(perso, position_perso)             
+                    pygame.display.flip()
 
-            if  key[pygame.K_s] :
-                clock.tick(ips)  
+                if event.key == K_s:
+                    clock.tick(ips)  
                                                   #décendre
-                position_perso = position_perso.move(0,speed)
-                for d in range (0,len(rekt_boîte)):                                           
-                    if position_perso.colliderect(rekt_boîte[d]):
-                        position_perso = position_perso.move(0,-repouser)
+                    position_perso = position_perso.move(0,speed)
+                    for d in range (0,len(rekt_boîte)):                                           
+                        if position_perso.colliderect(rekt_boîte[d]):
+                            position_perso = position_perso.move(0,-repouser)
                
-                position_perso = murs_colision(speed,position_perso) 
+                    position_perso = murs_colision(speed,position_perso) 
             
-                fenetre.blit(perso,position_perso)           
-                pygame.display.flip()
+                    fenetre.blit(perso,position_perso)           
+                    pygame.display.flip()
 
 
-                pygame.display.flip()
-            if key[pygame.K_v] : 
-                point_vie = point_vie - 1
-            if point_vie == 0 :
-                continuer2 = 0
+                    pygame.display.flip()
+                key=pygame.key.get_pressed()
+                if key[pygame.K_v] : 
+                    point_vie = point_vie - 1
+                if point_vie == 0 :
+                    continuer2 = 0
     score_finale=str(conteur)
     aff_score_final = arial_font.render("Score : "+score_finale, True, black)
     fenetre.blit(aff_score_final,(500,550))
