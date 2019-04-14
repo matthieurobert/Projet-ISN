@@ -22,6 +22,8 @@ caisse = liste[2]
 caisses = liste[3]
 position_x_y = liste[4]
 
+perso = pygame.image.load("perso.jpg").convert()
+position_perso = perso.get_rect()
 
 class ARBot(pygame.sprite.Sprite):
 	def __init__(self):
@@ -62,10 +64,6 @@ class LRBot(pygame.sprite.Sprite):
 		screen = pygame.display.get_surface()
 		self.area = screen.get_rect()
 		self.rect = pygame.Rect(0,200,50,50)
-		#self.side = side
-		#self.speed = 10
-		self.state = "still"
-		self.newpos = [0, 0]
 		self.speed = [1, 0]
 		self.update()
 
@@ -83,6 +81,24 @@ class LRBot(pygame.sprite.Sprite):
 
 
 		#print(self.speed)
+
+class Pojectiles(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("Test_Matthieu/projectiles.png")
+        self.rect = pygame.Rect(0,500, 20, 20)
+        self.posinit = pygame.Rect(0,500,20,20)
+        self.speed = [1,0]
+        self.update()
+
+    def update(self):
+        self.rect = self.rect.move(self.speed)
+        for d in range (0, len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
+                self.kill()
+                self.speed[0] = 0
+        
+
 class FolBot(pygame.sprite.Sprite):
 
 
@@ -112,8 +128,7 @@ class FolBot(pygame.sprite.Sprite):
 		self.rect = self.rect.move(1, 0)
 
 
-perso = pygame.image.load("perso.jpg").convert()
-position_perso = perso.get_rect()
+
 
 
 
@@ -154,6 +169,7 @@ pygame.key.set_repeat(50,15)
 alien = ARBot()
 pab = LRBot()
 follower = FolBot()
+balle = Pojectiles()
 
 pygame.display.flip
 continuer = 1
@@ -165,7 +181,12 @@ while continuer :
           if event.type == pygame.QUIT:
                 pygame.quit()
 
-        if abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
+        if abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
+            if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
+                follower.gauche()
+            else:
+                follower.droite()
+        elif abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
             if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
                 follower.gauche()
             else:
@@ -175,6 +196,7 @@ while continuer :
                 follower.haut()
             else:
                 follower.bas()
+        
 
 
         for event in pygame.event.get():
@@ -204,9 +226,10 @@ while continuer :
         fenetre.blit(perso,position_perso)
         fenetre.blit(hello_texte_surface,(500,5))
         fenetre.blit( follower.image, follower.rect)
+        fenetre.blit( balle.image, balle.rect)
   
         pab.update()
-
+        balle.update()
 
         pygame.display.flip()
 
