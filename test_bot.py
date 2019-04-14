@@ -127,6 +127,35 @@ class FolBot(pygame.sprite.Sprite):
 	def droite(self):
 		self.rect = self.rect.move(1, 0)
 
+class projecctil(pygame.sprite.Sprite):
+
+
+
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.image.load("partie_lilian/projectile.png")
+		screen = pygame.display.get_surface()
+		self.area = screen.get_rect()
+		self.rect = pygame.Rect(0,200,50,50)
+		#self.side = side
+		#self.speed = 10
+		self.state = "still"
+		self.newpos = [0, 0]
+		
+		self.update()
+
+
+	def droite(self):
+        self.speed = [1,0]
+		if self.rect.left < 0 or self.rect.right > 1095:
+			self.speed[0] = -self.speed[0]
+
+		for d in range (0,len(rekt_boîte)):
+
+			if self.rect.colliderect(rekt_boîte[d]):
+				self.speed[0] = -self.speed[0]
+
+		self.rect = self.rect.move(self.speed)
 
 
 
@@ -304,28 +333,30 @@ while continuer :
 
 
                     pygame.display.flip()
-                key=pygame.key.get_pressed()
-                if key[pygame.K_v] : 
+                
+                if event.key == K_v : 
                     point_vie = point_vie - 1
                 if point_vie == 0 :
                     continuer2 = 0
     score_finale=str(conteur)
     aff_score_final = arial_font.render("Score : "+score_finale, True, black)
     fenetre.blit(aff_score_final,(500,550))
+    affi_gam_over = pygame.image.load("partie_lilian\gameover.jpg").convert_alpha()
+
+    fenetre.blit(affi_gam_over,(125,5))
     while continuer3:
         for evenement in pygame.event.get():
-           if evenement.type == QUIT:
+            if evenement.type == QUIT:
 
                 continuer3 = 0
                 pygame.display.quit()
-
-        affi_gam_over = pygame.image.load("partie_lilian\gameover.jpg").convert_alpha()
-
-        fenetre.blit(affi_gam_over,(125,5))
-        
-
-        pygame.font.init()
+            if event.key == KEYDOWN:
+                if event.key == K_r:
+                    continuer3 = 0
+                    continuer2 = 1    
+      
         pygame.display.flip()
+        pygame.font.init()
 
 
 
