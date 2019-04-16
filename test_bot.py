@@ -4,8 +4,6 @@ import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
-from partie_lilian.variable import variable
-
 
 pygame.init()
 
@@ -92,13 +90,13 @@ class Pojectiles(pygame.sprite.Sprite):
         self.speed = [1,0]
         self.update()
 
-    def update(self):
+    def droite(self):
         self.rect = self.rect.move(self.speed)
         for d in range (0, len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
                 self.kill()
                 self.speed[0] = 0
-        
+ 
 
 class FolBot(pygame.sprite.Sprite):
 
@@ -128,35 +126,7 @@ class FolBot(pygame.sprite.Sprite):
 	def droite(self):
 		self.rect = self.rect.move(1, 0)
 
-class projecctil(pygame.sprite.Sprite):
 
-
-
-	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("partie_lilian/projectile.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = pygame.Rect(0,200,50,50)
-		#self.side = side
-		#self.speed = 10
-		self.state = "still"
-		self.newpos = [0, 0]
-		self.speed = [1,0]
-		self.update()
-
-
-	def droite(self):
-        
-		if self.rect.left < 0 or self.rect.right > 1095:
-			self.speed[0] = -self.speed[0]
-
-		for d in range (0,len(rekt_boîte)):
-
-			if self.rect.colliderect(rekt_boîte[d]):
-				self.speed[0] = -self.speed[0]
-
-		self.rect = self.rect.move(self.speed)
 
 black = (0, 0, 0)
 rouge = (255,25,0)
