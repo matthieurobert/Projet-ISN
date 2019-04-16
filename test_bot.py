@@ -3,7 +3,7 @@ import sys
 import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
-from partie_lilian.fonction import murs_colision,game_over
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
 
 
 pygame.init()
@@ -141,12 +141,12 @@ class projecctil(pygame.sprite.Sprite):
 		#self.speed = 10
 		self.state = "still"
 		self.newpos = [0, 0]
-		
+		self.speed = [1,0]
 		self.update()
 
 
 	def droite(self):
-        self.speed = [1,0]
+        
 		if self.rect.left < 0 or self.rect.right > 1095:
 			self.speed[0] = -self.speed[0]
 
@@ -168,9 +168,8 @@ depart = int(time.time())
 temps = time.time()
 conteur =int(temps-depart)
 chiffre=str(conteur)
-myrect = pygame.Rect(10,10, 150, 30)
 arial_font = pygame.font.SysFont("arial",30)
-hello_texte_surface = arial_font.render("Score : "+chiffre, True, black)
+aff_crono = arial_font.render("Score : "+chiffre, True, black)
 
 
 image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
@@ -178,7 +177,7 @@ image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").conver
 image_coeur3 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 image_coeur4 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 image_coeur5 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-point_vie = 5
+point_vie = 3
 chaine_vie = str(point_vie)
 image_vie = arial_font.render(" x "+chaine_vie,True, black)
 
@@ -239,21 +238,12 @@ while continuer :
            x= b[0]
            y= b[1]
            fenetre.blit(caisse, (x,y))
-        if point_vie>=1:
-            fenetre.blit(image_coeur1,(934,8))
-            if point_vie>=2:
-                fenetre.blit(image_coeur2,(972,8))
-                if point_vie>=3:
-                    fenetre.blit(image_coeur3,(1010,8))
-                    if point_vie>=4:
-                        fenetre.blit(image_coeur4,(1045,8))
-                        if point_vie>=5:
-                            fenetre.blit(image_coeur5,(1080,8))
+        vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
 
         fenetre.blit( alien.image, alien.rect)
         fenetre.blit( pab.image, pab.rect)
         fenetre.blit(perso,position_perso)
-        fenetre.blit(hello_texte_surface,(500,5))
+        fenetre.blit(aff_crono,(500,5))
         fenetre.blit( follower.image, follower.rect)
         fenetre.blit( balle.image, balle.rect)
   
@@ -263,15 +253,7 @@ while continuer :
         pygame.display.flip()
 
 
-        temps = time.time()
-        conteur =int(temps-depart)
-        chiffre=str(conteur)
-        myrect = pygame.Rect(10,10, 150, 30)
-    
-
-        arial_font = pygame.font.SysFont("arial",30)
-
-        hello_texte_surface = arial_font.render("Score : "+chiffre, True, black)
+        aff_crono=chrono(depart,black)
     
 
         for event in pygame.event.get():
@@ -282,53 +264,22 @@ while continuer :
             
             if  event.type == KEYDOWN :
                 if event.key == K_a:
-                    clock.tick(ips)             # gauche
-                    position_perso = position_perso.move(-speed,0)
-                    for d in range (0,len(rekt_boîte)):
-                        if position_perso.colliderect(rekt_boîte[d]):
-                            position_perso = position_perso.move(repouser,0)
-            
-                    position_perso = murs_colision(speed,position_perso)   
-            
-                    fenetre.blit(perso, position_perso)           
+                    position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+                    fenetre.blit(perso, position_perso)      #gauche
                     pygame.display.flip()
-
                 if event.key == K_d:
-                    clock.tick(ips)                   #droite
-                    position_perso = position_perso.move(speed,0)
-                    for d in range (0,len(rekt_boîte)):
-                        if position_perso.colliderect(rekt_boîte[d]):
-                            position_perso = position_perso.move(-repouser,0)
-                
-                    position_perso = murs_colision(speed,position_perso) 
-
-
-                    fenetre.blit(perso, position_perso)             
+                    position_perso=droite(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+                    fenetre.blit(perso, position_perso)        #droite     
                     pygame.display.flip()
 
                 if event.key == K_w:
-                    clock.tick(ips)                      # monter
-                    position_perso = position_perso.move(0,-speed)
-                    for d in range (0,len(rekt_boîte)):
-                        if position_perso.colliderect(rekt_boîte[d]):
-                            position_perso = position_perso.move(0,repouser)
-               
-                    position_perso = murs_colision(speed,position_perso) 
-
+                    position_perso=monter(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
                     fenetre.blit(perso, position_perso)             
-                    pygame.display.flip()
+                    pygame.display.flip()                       #monter
 
                 if event.key == K_s:
-                    clock.tick(ips)  
-                                                  #décendre
-                    position_perso = position_perso.move(0,speed)
-                    for d in range (0,len(rekt_boîte)):                                           
-                        if position_perso.colliderect(rekt_boîte[d]):
-                            position_perso = position_perso.move(0,-repouser)
-               
-                    position_perso = murs_colision(speed,position_perso) 
-            
-                    fenetre.blit(perso,position_perso)           
+                    position_perso=decendre(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+                    fenetre.blit(perso,position_perso)           #decendre
                     pygame.display.flip()
 
 
@@ -338,12 +289,8 @@ while continuer :
                     point_vie = point_vie - 1
                 if point_vie == 0 :
                     continuer2 = 0
-    score_finale=str(conteur)
-    aff_score_final = arial_font.render("Score : "+score_finale, True, black)
-    fenetre.blit(aff_score_final,(500,550))
-    affi_gam_over = pygame.image.load("partie_lilian\gameover.jpg").convert_alpha()
-
-    fenetre.blit(affi_gam_over,(125,5))
+    game_over(conteur,arial_font,fenetre,black)
+    
     while continuer3:
         for evenement in pygame.event.get():
             if evenement.type == QUIT:
