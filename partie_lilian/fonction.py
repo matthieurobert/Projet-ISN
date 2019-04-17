@@ -21,7 +21,12 @@ def game_over(conteur,arial_font,fenetre,black) :
     fenetre.blit(aff_score_final,(500,550))
     affi_gam_over = pygame.image.load("partie_lilian\gameover.jpg").convert_alpha()
     fenetre.blit(affi_gam_over,(125,5))
-def vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5) :
+def vie_coeur(point_vie,fenetre) :
+    image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
+    image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
+    image_coeur3 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
+    image_coeur4 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
+    image_coeur5 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha() 
     if point_vie>=1:
         fenetre.blit(image_coeur1,(934,8))
         if point_vie>=2:
@@ -77,7 +82,8 @@ def chrono(depart,black):
     temps = time.time()
     conteur =int(temps-depart)
     chiffre=str(conteur)
-    
+    liste_crono = []
     arial_font = pygame.font.SysFont("arial",30)
     aff_crono = arial_font.render("Score : "+chiffre, True, black)
-    return (aff_crono)
+    liste_crono=[aff_crono,conteur]
+    return (liste_crono)

@@ -90,7 +90,7 @@ class Pojectiles(pygame.sprite.Sprite):
         self.alive = 1
 
     def droite(self):
-        self.rect = self.rect.move(2,0)
+        self.rect = self.rect.move(4,0)
         for d in range (0, len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
                 self.alive = 0
@@ -156,11 +156,6 @@ conteur =int(temps-depart)
 chiffre=str(conteur)
 arial_font = pygame.font.SysFont("arial",30)
 point_vie = 3
-image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur3 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur4 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur5 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()   
 speed =4
 repouser = speed
 aff_crono = arial_font.render("Score : "+chiffre, True, black)
@@ -179,8 +174,9 @@ pygame.display.flip
 continuer = 1
 continuer2 = 1
 continuer3 = 1
-pygame.key.set_repeat(50,15)
+
 while continuer :
+    pygame.key.set_repeat(50,15)
     while continuer2:
         for event in pygame.event.get():
           if event.type == pygame.QUIT:
@@ -215,7 +211,7 @@ while continuer :
            x= b[0]
            y= b[1]
            fenetre.blit(caisse, (x,y))
-        vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
+        vie_coeur(point_vie,fenetre)
 
         fenetre.blit( alien.image, alien.rect)
         fenetre.blit( pab.image, pab.rect)
@@ -230,10 +226,12 @@ while continuer :
 
         pygame.display.flip()
 
-
-        aff_crono=chrono(depart,black)
+        liste_crono=chrono(depart,black)
+        aff_crono = liste_crono[0]
+        conteur = liste_crono[1]
+        
     
-
+        
         for event in pygame.event.get():
    
             if event.type == QUIT:
@@ -241,6 +239,8 @@ while continuer :
                 pygame.quit()
             
             if  event.type == KEYDOWN :
+                
+
                 if event.key == K_a:
                     position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
                     fenetre.blit(perso, position_perso)      #gauche
