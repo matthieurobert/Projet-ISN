@@ -87,17 +87,33 @@ class Pojectiles(pygame.sprite.Sprite):
         self.image = pygame.image.load("Test_Matthieu/projectiles.png")
         self.rect = position_perso
         self.posinit = position_perso
-        self.speed = [2,0]
-        self.update()
-
-    def update(self):
         self.alive = 1
 
     def droite(self):
-        self.rect = self.rect.move(self.speed)
+        self.rect = self.rect.move(2,0)
         for d in range (0, len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
-                self.speed[0] = 0
+                self.alive = 0
+                self.kill()
+    
+    def gauche(self): 
+        self.rect = self.rect.move(-2,0)
+        for d in range (0, len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
+                self.alive = 0 
+                self.kill()
+    
+    def haut(self):
+        self.rect = self.rect.move(0, -2)
+        for d in range (0, len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
+                self.alive = 0
+                self.kill()
+
+    def bas(self):
+        self.rect = self.rect.move(0, 2)
+        for d in range (0, len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
                 self.alive = 0
                 self.kill()
 
@@ -210,7 +226,7 @@ while continuer :
             fenetre.blit( balle.image, balle.rect)
   
         pab.update()
-        balle.update()
+        balle.droite()
 
         pygame.display.flip()
 
