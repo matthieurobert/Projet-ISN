@@ -1,6 +1,8 @@
 import pygame
 import sys
 import time
+from random import randrange
+from Partie_Clément.liste_x_y_bot import liste
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
@@ -8,6 +10,7 @@ from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauc
 
 pygame.init()
 
+bot_x_y = liste()
 
 rekt_boîte = rekt()
 salle = rekt_boîte[-1::]
@@ -97,7 +100,7 @@ class Pojectiles(pygame.sprite.Sprite):
             if self.rect.colliderect(rekt_boîte[d]):
                 self.kill()
                 self.speed[0] = 0
-        
+
 
 class FolBot(pygame.sprite.Sprite):
 
@@ -112,15 +115,15 @@ class FolBot(pygame.sprite.Sprite):
 		#self.side = side
 		#self.speed = 10
 		self.state = "still"
-	
-		
+
+
 
 	def bas(self):
 		self.rect = self.rect.move(0, 1)
 
 	def haut(self):
 		self.rect = self.rect.move(0, -1)
-	
+
 	def gauche(self):
 		self.rect = self.rect.move(-1, 0)
 
@@ -146,7 +149,7 @@ class projecctil(pygame.sprite.Sprite):
 
 
 	def droite(self):
-        
+
 		if self.rect.left < 0 or self.rect.right > 1095:
 			self.speed[0] = -self.speed[0]
 
@@ -203,108 +206,126 @@ pygame.display.flip
 continuer = 1
 continuer2 = 1
 continuer3 = 1
-while continuer :
-    while continuer2:
-        for event in pygame.event.get():
-          if event.type == pygame.QUIT:
-                pygame.quit()
+try :
+    while continuer :
+        while continuer2:
+            for event in pygame.event.get():
+              if event.type == pygame.QUIT:
+                    pygame.quit()
 
-        if abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
-            if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
-                follower.gauche()
-            else:
-                follower.droite()
-        elif abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
-            if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
-                follower.gauche()
-            else:
-                follower.droite()
-        elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
-            if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
-                follower.haut()
-            else:
-                follower.bas()
-        
-
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
+            if abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
+                if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
+                    follower.gauche()
+                else:
+                    follower.droite()
+            elif abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
+                if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
+                    follower.gauche()
+                else:
+                    follower.droite()
+            elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
+                if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
+                    follower.haut()
+                else:
+                    follower.bas()
 
 
-        fenetre.blit(table, (0, 0))
-        for i in range (0,caisses):
-           b=position_x_y[i]
-           x= b[0]
-           y= b[1]
-           fenetre.blit(caisse, (x,y))
-        vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
 
-        fenetre.blit( alien.image, alien.rect)
-        fenetre.blit( pab.image, pab.rect)
-        fenetre.blit(perso,position_perso)
-        fenetre.blit(aff_crono,(500,5))
-        fenetre.blit( follower.image, follower.rect)
-        fenetre.blit( balle.image, balle.rect)
-  
-        pab.update()
-        balle.update()
-
-        pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
 
 
-        aff_crono=chrono(depart,black)
-    
+            fenetre.blit(table, (0, 0))
+            for i in range (0,caisses):
+               b=position_x_y[i]
+               x= b[0]
+               y= b[1]
+               fenetre.blit(caisse, (x,y))
+            vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
 
-        for event in pygame.event.get():
-   
-            if event.type == QUIT:
-                continuer = 1
-                pygame.quit()
-            
-            if  event.type == KEYDOWN :
-                if event.key == K_a:
-                    position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                    fenetre.blit(perso, position_perso)      #gauche
-                    pygame.display.flip()
-                if event.key == K_d:
-                    position_perso=droite(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                    fenetre.blit(perso, position_perso)        #droite     
-                    pygame.display.flip()
+            fenetre.blit( alien.image, alien.rect)
+            fenetre.blit( pab.image, pab.rect)
+            fenetre.blit(perso,position_perso)
+            fenetre.blit(aff_crono,(500,5))
+            fenetre.blit( follower.image,follower.rect)
 
-                if event.key == K_w:
-                    position_perso=monter(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                    fenetre.blit(perso, position_perso)             
-                    pygame.display.flip()                       #monter
+            fenetre.blit( balle.image, balle.rect)
 
-                if event.key == K_s:
-                    position_perso=decendre(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                    fenetre.blit(perso,position_perso)           #decendre
-                    pygame.display.flip()
+            pab.update()
+            balle.update()
+
+            pygame.display.flip()
 
 
-                    pygame.display.flip()
-                
-                if event.key == K_v : 
-                    point_vie = point_vie - 1
-                if point_vie == 0 :
-                    continuer2 = 0
-    game_over(conteur,arial_font,fenetre,black)
-    
-    while continuer3:
-        for evenement in pygame.event.get():
-            if evenement.type == QUIT:
+            aff_crono=chrono(depart,black)
 
-                continuer3 = 0
-                pygame.display.quit()
-            if event.key == KEYDOWN:
-                if event.key == K_r:
+
+            for event in pygame.event.get():
+
+                if event.type == QUIT:
+                    continuer = 1
+                    pygame.quit()
+
+                if  event.type == KEYDOWN :
+                    if event.key == K_a:
+                        position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+                        fenetre.blit(perso, position_perso)      #gauche
+                        pygame.display.flip()
+                    if event.key == K_d:
+                        position_perso=droite(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+                        fenetre.blit(perso, position_perso)        #droite
+                        pygame.display.flip()
+
+                    if event.key == K_w:
+                        position_perso=monter(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+                        fenetre.blit(perso, position_perso)
+                        pygame.display.flip()                       #monter
+
+                    if event.key == K_s:
+                        position_perso=decendre(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+                        fenetre.blit(perso,position_perso)           #decendre
+                        pygame.display.flip()
+
+
+                        pygame.display.flip()
+
+                    if event.key == K_v :
+                        point_vie = point_vie - 1
+                        r = randrange(1,18)
+                        follower.rect= pygame.Rect(bot_x_y[r])
+                        alien.rect= pygame.Rect(bot_x_y[r-1])
+                        pab.rect= pygame.Rect(bot_x_y[r+1])
+                        fenetre.blit( follower.image,follower.rect)
+                        fenetre.blit( alien.image, alien.rect)
+                        fenetre.blit( pab.image, pab.rect)
+                        pygame.display.flip()
+
+
+
+                    if point_vie == 0 :
+                        continuer2 = 0
+
+
+
+        game_over(conteur,arial_font,fenetre,black)
+
+        while continuer3:
+            for evenement in pygame.event.get():
+                if evenement.type == QUIT:
+
                     continuer3 = 0
-                    continuer2 = 1    
-      
-        pygame.display.flip()
-        pygame.font.init()
+                    pygame.display.quit()
+                if event.key == KEYDOWN:
+                    if event.key == K_r:
+                        continuer3 = 0
+                        continuer2 = 1
 
+            pygame.display.flip()
+            pygame.font.init()
+except:
+    traceback.print_exc()
 
-
-pygame.quit()
+finally:
+    pygame.quit()
+    exit()
