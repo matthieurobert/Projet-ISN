@@ -5,7 +5,6 @@ from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
 
-
 pygame.init()
 
 
@@ -93,12 +92,15 @@ class Pojectiles(pygame.sprite.Sprite):
 
     def update(self):
         self.alive = 1
+
+    def droite(self):
         self.rect = self.rect.move(self.speed)
         for d in range (0, len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
                 self.speed[0] = 0
                 self.alive = 0
                 self.kill()
+
 
 class FolBot(pygame.sprite.Sprite):
 
@@ -129,10 +131,6 @@ class FolBot(pygame.sprite.Sprite):
 		self.rect = self.rect.move(1, 0)
 
 
-
-
-
-
 black = (0, 0, 0)
 rouge = (255,25,0)
 white = (255,255,255)
@@ -141,40 +139,31 @@ temps = time.time()
 conteur =int(temps-depart)
 chiffre=str(conteur)
 arial_font = pygame.font.SysFont("arial",30)
-aff_crono = arial_font.render("Score : "+chiffre, True, black)
-
-
+point_vie = 3
 image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 image_coeur3 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 image_coeur4 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur5 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-point_vie = 3
-chaine_vie = str(point_vie)
-image_vie = arial_font.render(" x "+chaine_vie,True, black)
-
-
+image_coeur5 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()   
 speed =4
 repouser = speed
-speed_diagonal = speed/2
+aff_crono = arial_font.render("Score : "+chiffre, True, black)
 ips = 60
 hauteur_x = 1100
 hauteur_y= 675
-
 clock = pygame.time.Clock()
-pygame.display.flip()
-continuer = 0
-pygame.key.set_repeat(50,15)
-
+pygame.display.flip() 
 alien = ARBot()
 pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
 
 pygame.display.flip
+
 continuer = 1
 continuer2 = 1
 continuer3 = 1
+pygame.key.set_repeat(50,15)
 while continuer :
     while continuer2:
         for event in pygame.event.get():
