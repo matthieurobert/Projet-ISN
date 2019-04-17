@@ -28,35 +28,6 @@ position_x_y = liste[4]
 perso = pygame.image.load("perso.jpg").convert()
 position_perso = perso.get_rect()
 
-class ARBot(pygame.sprite.Sprite):
-	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = self.image.get_rect()
-		#self.side = side
-		#self.speed = 10
-		self.state = "still"
-		self.newpos = [0, 0]
-		self.speed = [0, 1]
-		self.update()
-
-
-
-	def update(self):
-		if self.rect.left < 0 or self.rect.right > 1095:
-			self.speed[1] = -self.speed[1]
-
-		for d in range (0,len(rekt_boîte)):
-
-			if self.rect.colliderect(rekt_boîte[d]):
-				self.speed[1] = -self.speed[1]
-
-		self.rect = self.rect.move(self.speed)
-
-		#print(self.speed)
-
 class LRBot(pygame.sprite.Sprite):
 
 
@@ -188,7 +159,6 @@ pygame.display.flip()
 continuer = 0
 pygame.key.set_repeat(50,15)
 
-alien = ARBot()
 pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
@@ -235,7 +205,7 @@ try :
                fenetre.blit(caisse, (x,y))
             vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
 
-            fenetre.blit( alien.image, alien.rect)
+            
             fenetre.blit( pab.image, pab.rect)
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
@@ -285,10 +255,8 @@ try :
                         point_vie = point_vie - 1
                         r = randrange(1,18)
                         follower.rect= pygame.Rect(bot_x_y[r])
-                        alien.rect= pygame.Rect(bot_x_y[r-1])
                         pab.rect= pygame.Rect(bot_x_y[r+1])
                         fenetre.blit( follower.image,follower.rect)
-                        fenetre.blit( alien.image, alien.rect)
                         fenetre.blit( pab.image, pab.rect)
                         pygame.display.flip()
 
