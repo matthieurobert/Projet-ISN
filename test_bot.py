@@ -89,18 +89,37 @@ class Pojectiles(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Test_Matthieu/projectiles.png")
-        self.rect = pygame.Rect(0,500, 20, 20)
-        self.posinit = pygame.Rect(0,500,20,20)
-        self.speed = [1,0]
-        self.update()
+        self.rect = pygame.Rect(position_perso)
+        self.posinit = pygame.Rect(position_perso)
+        self.alive = 1
 
-    def update(self):
-        self.rect = self.rect.move(self.speed)
+    def droite(self):
+        self.rect = self.rect.move(2,0)
         for d in range (0, len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
+                self.alive = 0
                 self.kill()
-                self.speed[0] = 0
 
+    def gauche(self):
+        self.rect = self.rect.move(-2,0)
+        for d in range (0, len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
+                self.alive = 0
+                self.kill()
+
+    def haut(self):
+        self.rect = self.rect.move(0,-2)
+        for d in range (0, len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
+                self.alive = 0
+                self.kill()
+
+    def bas(self):
+        self.rect = self.rect.move(0,2)
+        for d in range (0, len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
+                self.alive = 0
+                self.kill()
 
 class FolBot(pygame.sprite.Sprite):
 
@@ -130,35 +149,7 @@ class FolBot(pygame.sprite.Sprite):
 	def droite(self):
 		self.rect = self.rect.move(1, 0)
 
-class projecctil(pygame.sprite.Sprite):
 
-
-
-	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("partie_lilian/projectile.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = pygame.Rect(0,200,50,50)
-		#self.side = side
-		#self.speed = 10
-		self.state = "still"
-		self.newpos = [0, 0]
-		self.speed = [1,0]
-		self.update()
-
-
-	def droite(self):
-
-		if self.rect.left < 0 or self.rect.right > 1095:
-			self.speed[0] = -self.speed[0]
-
-		for d in range (0,len(rekt_boîte)):
-
-			if self.rect.colliderect(rekt_boîte[d]):
-				self.speed[0] = -self.speed[0]
-
-		self.rect = self.rect.move(self.speed)
 
 
 
@@ -249,11 +240,11 @@ try :
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
             fenetre.blit( follower.image,follower.rect)
-
-            fenetre.blit( balle.image, balle.rect)
+            if balle.alive:
+                fenetre.blit( balle.image, balle.rect)
 
             pab.update()
-            balle.update()
+            balle.droite()
 
             pygame.display.flip()
 
