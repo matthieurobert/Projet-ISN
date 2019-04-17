@@ -32,29 +32,27 @@ class LRBot(pygame.sprite.Sprite):
 
 
 
-	def __init__(self):
+	def __init__(self):               #attribuion des variable de départ 
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite2.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = pygame.Rect(0,200,50,50)
-		self.speed = [1, 0]
+		self.image = pygame.image.load("Test_Matthieu/sprite2.png")    #Attribition de l'image
+		self.rect = pygame.Rect(0,200,50,50)         #Créaton du rect du bot 
+		self.speed = [1, 0]                            #Création de la liste pour la vitesse
 		self.update()
 
 
-	def update(self):
-		if self.rect.left < 0 or self.rect.right > 1095:
-			self.speed[0] = -self.speed[0]
+	def update(self):             #Création de la fonction d'actualistion
+		if self.rect.left < 0 or self.rect.right > 1095:   #Test pour savoir si le bot n'est pa sorti de l'écran
+			self.speed[0] = -self.speed[0]    #Changement de sens du bot 
 
-		for d in range (0,len(rekt_boîte)):
+		for d in range (0,len(rekt_boîte)):   #Parcour de la liste contenant les coordonnées des obstacles
 
-			if self.rect.colliderect(rekt_boîte[d]):
-				self.speed[0] = -self.speed[0]
+			if self.rect.colliderect(rekt_boîte[d]):#Test des collisions avec un obstable
+				self.speed[0] = -self.speed[0] #Si collisions changement du sens du bot 
 
-		self.rect = self.rect.move(self.speed)
+		self.rect = self.rect.move(self.speed) #Déplacement du bot 
 
 
-		#print(self.speed)
+	
 
 class Pojectiles(pygame.sprite.Sprite):
     def __init__(self):
@@ -96,35 +94,27 @@ class FolBot(pygame.sprite.Sprite):
 
 
 
-	def __init__(self):
+	def __init__(self):  #Attribution des variables de départ 
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite2.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = pygame.Rect(400,200,50,50)
-		#self.side = side
-		#self.speed = 10
-		self.state = "still"
-
-
-
-	def bas(self):
-		self.rect = self.rect.move(0, 1)
-
-	def haut(self):
-		self.rect = self.rect.move(0, -1)
-
-	def gauche(self):
-		self.rect = self.rect.move(-1, 0)
-
-	def droite(self):
-		self.rect = self.rect.move(1, 0)
-
-
-
-
-
-
+		self.image = pygame.image.load("Test_Matthieu/sprite2.png") #Attribution de l'image 
+		self.rect = pygame.Rect(400,200,50,50)    #Création du Rect du bot 
+        
+    def update(self):                                    
+        if abs(position_perso[0] - self.rect[0]) == abs(position_perso[1] - self.rect[1]):
+            if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
+                self.rect = self.rect.move(-1, 0)
+            else:
+                self.rect = self.rect.move(1, 0)
+        elif abs(position_perso[0] - self.rect[0]) > abs(position_perso[1] - self.rect[1]):
+            if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
+                self.rect = self.rect.move(-1, 0)
+            else:
+                self.rect = self.rect.move(1, 0)
+        elif abs(position_perso[0] - self.rect[0]) < abs(position_perso[1] - self.rect[0]):
+            if abs(position_perso[1] - self.rect[1]) != position_perso[1] - self.rect[1]:
+                self.rect = self.rect.move(0, -1)
+            else:
+                self.rect = self.rect.move(0, 1)
 
 black = (0, 0, 0)
 rouge = (255,25,0)
@@ -174,23 +164,6 @@ try :
               if event.type == pygame.QUIT:
                     pygame.quit()
 
-            if abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
-                if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
-                    follower.gauche()
-                else:
-                    follower.droite()
-            elif abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
-                if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
-                    follower.gauche()
-                else:
-                    follower.droite()
-            elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
-                if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
-                    follower.haut()
-                else:
-                    follower.bas()
-
-
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -214,6 +187,7 @@ try :
                 fenetre.blit( balle.image, balle.rect)
 
             pab.update()
+            follower.update()
             balle.droite()
 
             pygame.display.flip()
