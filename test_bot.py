@@ -214,7 +214,13 @@ try:
                 else:
                     follower.bas()
 
-
+            if pab.rect.colliderect(position_perso):
+                point_vie = point_vie - 1
+                r = randrange(1,18)
+                follower.rect= pygame.Rect(bot_x_y[r])
+                pab.rect= pygame.Rect(bot_x_y[r+1])
+                fenetre.blit( follower.image,follower.rect)
+                fenetre.blit( pab.image, pab.rect)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
