@@ -97,22 +97,22 @@ class FolBot(pygame.sprite.Sprite):
 		self.image = pygame.image.load("Test_Matthieu/sprite2.png") #Attribution de l'image 
 		self.rect = pygame.Rect(400,200,50,50)    #Création du Rect du bot 
 
-    def update():  #Création de la fonction d'actualisation
-        if abs(position_perso[0] - self.rect[0]) == abs(position_perso[1] - self.rect[1]):
-            if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
-                self.rect = self.rect.move(-1, 0)
-            else:
-                self.rect = self.rect.move(1, 0)
-        elif abs(position_perso[0] - self.rect[0]) > abs(position_perso[1] - self.rect[1]):
-            if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
-                self.rect = self.rect.move(-1, 0)
-            else:
-                self.rect = self.rect.move(1, 0)
-        elif abs(position_perso[0] - self.rect[0]) < abs(position_perso[1] - self.rect[0]):
-            if abs(position_perso[1] - self.rect[1]) != position_perso[1] - self.rect[1]:
-                self.rect = self.rect.move(0, -1)
-            else:
-                self.rect = self.rect.move(0, 1)
+	def update():  #Création de la fonction d'actualisation
+		if abs(position_perso[0] - self.rect[0]) == abs(position_perso[1] - self.rect[1]):
+			if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
+				self.rect = self.rect.move(-1, 0)
+			else:
+				self.rect = self.rect.move(1, 0)
+		elif abs(position_perso[0] - self.rect[0]) > abs(position_perso[1] - self.rect[1]):
+			if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
+				self.rect = self.rect.move(-1, 0)
+			else:
+				self.rect = self.rect.move(1, 0)
+		elif abs(position_perso[0] - self.rect[0]) < abs(position_perso[1] - self.rect[0]):
+			if abs(position_perso[1] - self.rect[1]) != position_perso[1] - self.rect[1]:
+				self.rect = self.rect.move(0, -1)
+			else:
+				self.rect = self.rect.move(0, 1)
 
 black = (0, 0, 0)
 rouge = (255,25,0)
