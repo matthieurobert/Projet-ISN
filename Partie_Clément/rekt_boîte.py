@@ -2,19 +2,12 @@ import pygame
 
 def rekt():
 
-    from  Partie_Clément.salle import salle
-
+    from  Partie_Clément.salle import salle # on importe la liste de la
+                                            #  fonction salle
     a=salle()
     c=list(a)
-    del a[0]
-    del a[0]
-    del a[0]
-    del a[0]
 
-    for x in range(0,1):
-        b=a[0]
-
-
+    b=a[4] # on récupère la 4ème  valeur (  position_x_y  )
 
     newliste=[]
     rekt_caisse=[]
@@ -22,11 +15,12 @@ def rekt():
         newliste=[]
         liste=[]
         recup = b[x]
-        recup1=recup[0]
-        recup2=recup[1]
+        recup1=recup[0]      # On récupère chaque valeur de chaques coordonnées
+        recup2=recup[1]           # on ajoute le rect de la boîte qui est 50,50
         rect = pygame.Rect(recup1,recup2,50,50)
         rekt_caisse.append(rect)
-    rekt_caisse.append(c)
+    rekt_caisse.append(c)               # on remet le reste dans le rekt_caisse
+                                         # soit la fonction salle
 
 
-    return(rekt_caisse)
+    return(rekt_caisse) # on renvoie le rect
