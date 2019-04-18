@@ -3,11 +3,14 @@ import sys
 import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
+from Partie_Clément.liste_x_y_bot import liste
 from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
+from partie_lilian.variable import variable
+from random import randrange
 
 pygame.init()
 
-
+bot_x_y = liste()
 rekt_boîte = rekt()
 salle = rekt_boîte[-1::]
 del rekt_boîte[-1:]
@@ -147,21 +150,22 @@ class FolBot(pygame.sprite.Sprite):
 		self.rect = self.rect.move(1, 0)
 
 
-black = (0, 0, 0)
-rouge = (255,25,0)
-white = (255,255,255)
-depart = int(time.time())
-temps = time.time()
-conteur =int(temps-depart)
-chiffre=str(conteur)
-arial_font = pygame.font.SysFont("arial",30)
-point_vie = 3
-speed =4
-repouser = speed
-aff_crono = arial_font.render("Score : "+chiffre, True, black)
-ips = 60
-hauteur_x = 1100
-hauteur_y= 675
+les_variable = variable()
+black = les_variable[0]
+rouge = les_variable[1]
+white = les_variable[2]
+depart = les_variable[3]
+temps = les_variable[4]
+conteur = les_variable[5]
+chiffre = les_variable[6]
+arial_font = les_variable[7]
+point_vie = les_variable[8]
+speed = les_variable[9]
+repouser = les_variable[10]
+ips = les_variable[11]
+hauteur_x = les_variable[12]
+hauteur_y = les_variable[13]
+aff_crono = les_variable[14]
 clock = pygame.time.Clock()
 pygame.display.flip() 
 alien = ARBot()
@@ -223,7 +227,7 @@ while continuer :
   
         pab.update()
         balle.droite()
-
+        follower.update()
         pygame.display.flip()
 
         liste_crono=chrono(depart,black)
@@ -265,6 +269,12 @@ while continuer :
                 
                 if event.key == K_v : 
                     point_vie = point_vie - 1
+                    r = randrange(1,18)
+                    follower.rect= pygame.Rect(bot_x_y[r])
+                    pab.rect= pygame.Rect(bot_x_y[r+1])
+                    fenetre.blit( follower.image,follower.rect)
+                    fenetre.blit( pab.image, pab.rect)
+                    pygame.display.flip()
                 if point_vie == 0 :
                     continuer2 = 0
     game_over(conteur,arial_font,fenetre,black)
