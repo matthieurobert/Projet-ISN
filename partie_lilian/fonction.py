@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import time
+from random import randrange
 def murs_colision(speed,position_perso) :
     hauteur_x = 1100
     hauteur_y= 675
@@ -87,3 +88,15 @@ def chrono(depart,black):
     aff_crono = arial_font.render("Score : "+chiffre, True, black)
     liste_crono=[aff_crono,conteur]
     return (liste_crono)
+
+def génératrice_nom():
+    nombre= randrange(0,26)
+    lettre = ["a","b","e","r","t","y","u","i","o","p","q","s","d","f","g","h","j","k","l","m","w","x","c","v","b","n"]
+    nombre2= randrange(0,9)
+    mots=[]
+    for i in range (0,nombre2):
+        mots.append(lettre[nombre])
+        nombre= randrange(0,26)
+    s=''
+    mots_aleatoire = s.join(mots)
+    return (mots_aleatoire)

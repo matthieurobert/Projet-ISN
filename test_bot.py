@@ -5,7 +5,7 @@ from random import randrange
 from Partie_Clément.liste_x_y_bot import liste
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,génératrice_nom
 
 
 pygame.init()
@@ -298,12 +298,17 @@ try :
                         fenetre.blit( alien.image, alien.rect)
                         fenetre.blit( pab.image, pab.rect)
                         pygame.display.flip()
-
+                    if event.key == K_RIGHT :
 
 
                     if point_vie == 0 :
                         continuer2 = 0
 
+                if  event.type == KEYUP :   
+                    if event.type == K_RIGHT :
+                    nom_aleatoire=génératrice_nom()
+                    nom_aleatoire =Pojectiles()
+                    nom_aleatoire 
 
 
         game_over(conteur,arial_font,fenetre,black)
