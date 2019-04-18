@@ -127,7 +127,7 @@ class FolBot(pygame.sprite.Sprite):
 
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite2.png")
+		self.image = pygame.image.load("Test_Matthieu/sprite4.png")
 		screen = pygame.display.get_surface()
 		self.area = screen.get_rect()
 		self.rect = pygame.Rect(400,200,50,50)
@@ -192,6 +192,12 @@ try:
                     pygame.quit()
             if follower.rect.colliderect(position_perso):
                 follower.stop()
+                point_vie = point_vie - 1
+                r = randrange(1,18)
+                follower.rect= pygame.Rect(bot_x_y[r])
+                pab.rect= pygame.Rect(bot_x_y[r+1])
+                fenetre.blit( follower.image,follower.rect)
+                fenetre.blit( pab.image, pab.rect)
             elif abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
                 if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
                     follower.gauche()
@@ -208,7 +214,13 @@ try:
                 else:
                     follower.bas()
 
-
+            if pab.rect.colliderect(position_perso):
+                point_vie = point_vie - 1
+                r = randrange(1,18)
+                follower.rect= pygame.Rect(bot_x_y[r])
+                pab.rect= pygame.Rect(bot_x_y[r+1])
+                fenetre.blit( follower.image,follower.rect)
+                fenetre.blit( pab.image, pab.rect)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
