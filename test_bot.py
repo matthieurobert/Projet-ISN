@@ -217,7 +217,7 @@ while continuer :
         fenetre.blit( pab.image, pab.rect)
         fenetre.blit(perso,position_perso)
         fenetre.blit(aff_crono,(500,5))
-        fenetre.blit( follower.image, follower.rect)
+        fenetre.blit( follower.image, (follower.rect))
         if balle.alive :
             fenetre.blit( balle.image, balle.rect)
   
@@ -239,7 +239,8 @@ while continuer :
                 pygame.quit()
             
             if  event.type == KEYDOWN :
-                
+                if event.key == K_RIGHT:
+                    balle.droite()
 
                 if event.key == K_a:
                     position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
