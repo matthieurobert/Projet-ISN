@@ -192,6 +192,12 @@ try:
                     pygame.quit()
             if follower.rect.colliderect(position_perso):
                 follower.stop()
+                point_vie = point_vie - 1
+                r = randrange(1,18)
+                follower.rect= pygame.Rect(bot_x_y[r])
+                pab.rect= pygame.Rect(bot_x_y[r+1])
+                fenetre.blit( follower.image,follower.rect)
+                fenetre.blit( pab.image, pab.rect)
             elif abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
                 if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
                     follower.gauche()
