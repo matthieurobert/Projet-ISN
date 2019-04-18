@@ -127,7 +127,7 @@ class FolBot(pygame.sprite.Sprite):
 
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite2.png")
+		self.image = pygame.image.load("Test_Matthieu/sprite4.png")
 		screen = pygame.display.get_surface()
 		self.area = screen.get_rect()
 		self.rect = pygame.Rect(400,200,50,50)
