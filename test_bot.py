@@ -55,40 +55,40 @@ class LRBot(pygame.sprite.Sprite):
 	
 
 class Pojectiles(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("Test_Matthieu/projectiles.png")
-        self.rect = pygame.Rect(position_perso)
-        self.posinit = pygame.Rect(position_perso)
-        self.alive = 1
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.image.load("Test_Matthieu/projectiles.png")
+		self.rect = pygame.Rect(position_perso)
+		self.posinit = pygame.Rect(position_perso)
+		self.alive = 1
 
-    def droite(self):
-        self.rect = self.rect.move(2,0)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
+	def droite(self):
+		self.rect = self.rect.move(2,0)
+		for d in range (0, len(rekt_boîte)):
+			if self.rect.colliderect(rekt_boîte[d]):
+				self.alive = 0
+				self.kill()
 
-    def gauche(self):
-        self.rect = self.rect.move(-2,0)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
+	def gauche(self):
+		self.rect = self.rect.move(-2,0)
+		for d in range (0, len(rekt_boîte)):
+			if self.rect.colliderect(rekt_boîte[d]):
+				self.alive = 0
+				self.kill()
 
-    def haut(self):
-        self.rect = self.rect.move(0,-2)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
+	def haut(self):
+		self.rect = self.rect.move(0,-2)
+		for d in range (0, len(rekt_boîte)):
+			if self.rect.colliderect(rekt_boîte[d]):
+				self.alive = 0
+				self.kill()
 
-    def bas(self):
-        self.rect = self.rect.move(0,2)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
+	def bas(self):
+		self.rect = self.rect.move(0,2)
+		for d in range (0, len(rekt_boîte)):
+			if self.rect.colliderect(rekt_boîte[d]):
+				self.alive = 0
+				self.kill()
 
 class FolBot(pygame.sprite.Sprite):
 
@@ -98,23 +98,23 @@ class FolBot(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		self.image = pygame.image.load("Test_Matthieu/sprite2.png") #Attribution de l'image 
 		self.rect = pygame.Rect(400,200,50,50)    #Création du Rect du bot 
-        
-    def update(self):                                    
-        if abs(position_perso[0] - self.rect[0]) == abs(position_perso[1] - self.rect[1]):
-            if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
-                self.rect = self.rect.move(-1, 0)
-            else:
-                self.rect = self.rect.move(1, 0)
-        elif abs(position_perso[0] - self.rect[0]) > abs(position_perso[1] - self.rect[1]):
-            if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
-                self.rect = self.rect.move(-1, 0)
-            else:
-                self.rect = self.rect.move(1, 0)
-        elif abs(position_perso[0] - self.rect[0]) < abs(position_perso[1] - self.rect[0]):
-            if abs(position_perso[1] - self.rect[1]) != position_perso[1] - self.rect[1]:
-                self.rect = self.rect.move(0, -1)
-            else:
-                self.rect = self.rect.move(0, 1)
+
+	def upadate(self):
+		if abs(position_perso[0] - self.rect[0]) == abs(position_perso[1] - self.rect[1]):
+			if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
+				self.rect = self.rect.move(-1, 0)
+			else:
+				self.rect = self.rect.move(1, 0)
+		elif abs(position_perso[0] - self.rect[0]) > abs(position_perso[1] - self.rect[1]):
+			if abs(position_perso[0] - self.rect[0]) != position_perso[0] - self.rect[0]:
+				self.rect = self.rect.move(-1, 0)
+			else:
+				self.rect = self.rect.move(1, 0)
+		elif abs(position_perso[0] - self.rect[0]) < abs(position_perso[1] - self.rect[0]):
+			if abs(position_perso[1] - self.rect[1]) != position_perso[1] - self.rect[1]:
+				self.rect = self.rect.move(0, -1)
+			else:
+				self.rect = self.rect.move(0, 1)
 
 black = (0, 0, 0)
 rouge = (255,25,0)
@@ -158,107 +158,107 @@ continuer = 1
 continuer2 = 1
 continuer3 = 1
 try :
-    while continuer :
-        while continuer2:
-            for event in pygame.event.get():
-              if event.type == pygame.QUIT:
-                    pygame.quit()
+	while continuer :
+		while continuer2:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
 
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
 
 
-            fenetre.blit(table, (0, 0))
-            for i in range (0,caisses):
-               b=position_x_y[i]
-               x= b[0]
-               y= b[1]
-               fenetre.blit(caisse, (x,y))
-            vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
+			fenetre.blit(table, (0, 0))
+			for i in range (0,caisses):
+			   b=position_x_y[i]
+			   x= b[0]
+			   y= b[1]
+			   fenetre.blit(caisse, (x,y))
+			vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
 
-            
-            fenetre.blit( pab.image, pab.rect)
-            fenetre.blit(perso,position_perso)
-            fenetre.blit(aff_crono,(500,5))
-            fenetre.blit( follower.image,follower.rect)
-            if balle.alive:
-                fenetre.blit( balle.image, balle.rect)
+			
+			fenetre.blit( pab.image, pab.rect)
+			fenetre.blit(perso,position_perso)
+			fenetre.blit(aff_crono,(500,5))
+			fenetre.blit( follower.image,follower.rect)
+			if balle.alive:
+				fenetre.blit( balle.image, balle.rect)
 
-            pab.update()
-            follower.update()
-            balle.droite()
+			pab.update()
+			follower.update()
+			balle.droite()
 
-            pygame.display.flip()
-
-
-            aff_crono=chrono(depart,black)
+			pygame.display.flip()
 
 
-            for event in pygame.event.get():
-
-                if event.type == QUIT:
-                    continuer = 1
-                    pygame.quit()
-
-                if  event.type == KEYDOWN :
-                    if event.key == K_a:
-                        position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso, position_perso)      #gauche
-                        pygame.display.flip()
-                    if event.key == K_d:
-                        position_perso=droite(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso, position_perso)        #droite
-                        pygame.display.flip()
-
-                    if event.key == K_w:
-                        position_perso=monter(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso, position_perso)
-                        pygame.display.flip()                       #monter
-
-                    if event.key == K_s:
-                        position_perso=decendre(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso,position_perso)           #decendre
-                        pygame.display.flip()
+			aff_crono=chrono(depart,black)
 
 
-                        pygame.display.flip()
+			for event in pygame.event.get():
 
-                    if event.key == K_v :
-                        point_vie = point_vie - 1
-                        r = randrange(1,18)
-                        follower.rect= pygame.Rect(bot_x_y[r])
-                        pab.rect= pygame.Rect(bot_x_y[r+1])
-                        fenetre.blit( follower.image,follower.rect)
-                        fenetre.blit( pab.image, pab.rect)
-                        pygame.display.flip()
+				if event.type == QUIT:
+					continuer = 1
+					pygame.quit()
+
+				if  event.type == KEYDOWN :
+					if event.key == K_a:
+						position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+						fenetre.blit(perso, position_perso)      #gauche
+						pygame.display.flip()
+					if event.key == K_d:
+						position_perso=droite(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+						fenetre.blit(perso, position_perso)        #droite
+						pygame.display.flip()
+
+					if event.key == K_w:
+						position_perso=monter(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+						fenetre.blit(perso, position_perso)
+						pygame.display.flip()                       #monter
+
+					if event.key == K_s:
+						position_perso=decendre(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
+						fenetre.blit(perso,position_perso)           #decendre
+						pygame.display.flip()
 
 
+						pygame.display.flip()
 
-                    if point_vie == 0 :
-                        continuer2 = 0
+					if event.key == K_v :
+						point_vie = point_vie - 1
+						r = randrange(1,18)
+						follower.rect= pygame.Rect(bot_x_y[r])
+						pab.rect= pygame.Rect(bot_x_y[r+1])
+						fenetre.blit( follower.image,follower.rect)
+						fenetre.blit( pab.image, pab.rect)
+						pygame.display.flip()
 
 
 
-        game_over(conteur,arial_font,fenetre,black)
+					if point_vie == 0 :
+						continuer2 = 0
 
-        while continuer3:
-            for evenement in pygame.event.get():
-                if evenement.type == QUIT:
 
-                    continuer3 = 0
-                    pygame.display.quit()
-                if event.key == KEYDOWN:
-                    if event.key == K_r:
-                        continuer3 = 0
-                        continuer2 = 1
 
-            pygame.display.flip()
-            pygame.font.init()
+		game_over(conteur,arial_font,fenetre,black)
+
+		while continuer3:
+			for evenement in pygame.event.get():
+				if evenement.type == QUIT:
+
+					continuer3 = 0
+					pygame.display.quit()
+				if event.key == KEYDOWN:
+					if event.key == K_r:
+						continuer3 = 0
+						continuer2 = 1
+
+			pygame.display.flip()
+			pygame.font.init()
 except:
-    traceback.print_exc()
+	traceback.print_exc()
 
 finally:
-    pygame.quit()
-    exit()
+	pygame.quit()
+	exit()
