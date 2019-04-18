@@ -5,7 +5,7 @@ from random import randrange
 from Partie_Clément.liste_x_y_bot import liste
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,génératrice_nom
 
 
 pygame.init()
@@ -134,7 +134,7 @@ pygame.display.flip()
 
 pab = LRBot()
 follower = FolBot()
-balle = Pojectiles()
+
 pygame.key.set_repeat(50,15)
 
 pab = LRBot()
@@ -171,11 +171,9 @@ try :
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
             fenetre.blit( follower.image, follower.rect)
-            if balle.alive :
-                fenetre.blit( balle.image, balle.rect)
-  
+
+     
             pab.update()
-            balle.droite()
 
             pygame.display.flip()
 
@@ -221,10 +219,16 @@ try :
                         pygame.display.flip()
                    
                     
-                    if point_vie == 0 :
-                        continuer2 = 0
-                       
+                    
+                  
+                    if event.key == K_RIGHT :                                                
+                        if balle.alive :
+                            fenetre.blit( balle.image, balle.rect)
+                        balle.droite()
+                        pygame.display.flip() 
 
+                if point_vie == 0 :
+                    continuer2 = 0
 
         game_over(conteur,arial_font,fenetre,black)
 
