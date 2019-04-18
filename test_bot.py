@@ -5,7 +5,7 @@ from random import randrange
 from Partie_Clément.liste_x_y_bot import liste
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,génératrice_nom
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
 
 
 pygame.init()
@@ -122,29 +122,19 @@ temps = time.time()
 conteur =int(temps-depart)
 chiffre=str(conteur)
 arial_font = pygame.font.SysFont("arial",30)
-aff_crono = arial_font.render("Score : "+chiffre, True, black)
-
-
-image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur3 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur4 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
-image_coeur5 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
 point_vie = 3
-chaine_vie = str(point_vie)
-image_vie = arial_font.render(" x "+chaine_vie,True, black)
-
-
 speed =4
 repouser = speed
-speed_diagonal = speed/2
+aff_crono = arial_font.render("Score : "+chiffre, True, black)
 ips = 60
 hauteur_x = 1100
 hauteur_y= 675
-
 clock = pygame.time.Clock()
-pygame.display.flip()
-continuer = 0
+pygame.display.flip() 
+
+pab = LRBot()
+follower = FolBot()
+balle = Pojectiles()
 pygame.key.set_repeat(50,15)
 
 pab = LRBot()
@@ -174,26 +164,24 @@ try :
                x= b[0]
                y= b[1]
                fenetre.blit(caisse, (x,y))
-            vie_coeur(point_vie,fenetre,image_coeur1,image_coeur2,image_coeur3,image_coeur4,image_coeur5)
 
-            
+            vie_coeur(point_vie,fenetre)
+      
             fenetre.blit( pab.image, pab.rect)
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
-            fenetre.blit( follower.image,follower.rect)
-            if balle.alive:
+            fenetre.blit( follower.image, follower.rect)
+            if balle.alive :
                 fenetre.blit( balle.image, balle.rect)
-
+  
             pab.update()
-            follower.update()
             balle.droite()
 
             pygame.display.flip()
 
-
-            aff_crono=chrono(depart,black)
-
-
+            liste_crono=chrono(depart,black)
+            aff_crono = liste_crono[0]
+            conteur = liste_crono[1]
             for event in pygame.event.get():
 
                 if event.type == QUIT:
@@ -231,17 +219,11 @@ try :
                         fenetre.blit( follower.image,follower.rect)
                         fenetre.blit( pab.image, pab.rect)
                         pygame.display.flip()
-                    if event.key == K_RIGHT :
-
-
+                   
+                    
                     if point_vie == 0 :
                         continuer2 = 0
-
-                if  event.type == KEYUP :   
-                    if event.type == K_RIGHT :
-                    nom_aleatoire=génératrice_nom()
-                    nom_aleatoire =Pojectiles()
-                    nom_aleatoire 
+                       
 
 
         game_over(conteur,arial_font,fenetre,black)
