@@ -2,6 +2,37 @@ import pygame
 from pygame.locals import *
 import time
 from random import randrange
+
+def demande_de_nom():
+    pygame.init()
+    fenetre = pygame.display.set_mode((1145,720))
+    bleu = (40, 120, 230)
+    vert = (40, 230, 120)
+    arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
+    prompt = arial.render('Entrez votre pseuso : ', True, bleu)
+    nom_joueur = ""
+    aff_nom_joueur = arial.render(nom_joueur, True, vert)
+    continuer = 1
+    while continuer:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                continuer = 0
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                    continuer = 0
+               
+                if event.key == pygame.K_BACKSPACE:
+                    nom_joueur = nom_joueur[:-1]
+                else:
+                    nom_joueur += event.unicode
+                aff_nom_joueur = arial.render(nom_joueur, True, vert) 
+        fenetre.fill((0,0,0))
+        fenetre.blit(prompt, (225,300))
+        fenetre.blit(aff_nom_joueur, (700,300))
+        pygame.display.flip()
+    
+    return(nom_joueur)
 def murs_colision(speed,position_perso) :
     hauteur_x = 1100
     hauteur_y= 675
@@ -18,10 +49,10 @@ def murs_colision(speed,position_perso) :
 def game_over(conteur,arial_font,fenetre,black) :
 
     score_finale=str(conteur)
-    aff_score_final = arial_font.render("Score : "+score_finale, True, black)
-    fenetre.blit(aff_score_final,(500,550))
+    aff_score_final = arial_font.render("Score : "+score_finale, True, black)   
     affi_gam_over = pygame.image.load("partie_lilian\gameover.jpg").convert_alpha()
-    fenetre.blit(affi_gam_over,(125,5))
+    fenetre.blit(affi_gam_over,(150,50))
+    fenetre.blit(aff_score_final,(500,550))
 def vie_coeur(point_vie,fenetre) :
     image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
     image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()

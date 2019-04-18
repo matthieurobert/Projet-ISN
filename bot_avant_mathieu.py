@@ -4,7 +4,7 @@ import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from Partie_Clément.liste_x_y_bot import liste
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom
 from partie_lilian.variable import variable
 from random import randrange
 
@@ -149,7 +149,7 @@ class FolBot(pygame.sprite.Sprite):
 	def droite(self):
 		self.rect = self.rect.move(1, 0)
 
-
+nom_joeur = demande_de_nom()
 les_variable = variable()
 black = les_variable[0]
 rouge = les_variable[1]
@@ -166,6 +166,7 @@ ips = les_variable[11]
 hauteur_x = les_variable[12]
 hauteur_y = les_variable[13]
 aff_crono = les_variable[14]
+nom_joeur=str
 clock = pygame.time.Clock()
 pygame.display.flip()
 alien = ARBot()
@@ -181,6 +182,7 @@ continuer3 = 1
 
 try:
     while continuer :
+        
         pygame.key.set_repeat(50,15)
         while continuer2:
             for event in pygame.event.get():
