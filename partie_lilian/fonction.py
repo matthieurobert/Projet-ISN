@@ -6,12 +6,16 @@ from random import randrange
 def demande_de_nom():
     pygame.init()
     fenetre = pygame.display.set_mode((1145,720))
+    font = pygame.image.load("partie_lilian\py-blast-accuil.png")
     bleu = (40, 120, 230)
     vert = (40, 230, 120)
+    noir = (0, 0, 0)
+    rouge = (255, 0, 0)
     arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
-    prompt = arial.render('Entrez votre pseuso : ', True, bleu)
+    prompt = arial.render('Entrez votre pseuso : ', True, noir)
     nom_joueur = ""
-    aff_nom_joueur = arial.render(nom_joueur, True, vert)
+    aff_nom_joueur = arial.render(nom_joueur, True, rouge)
+    fenetre.blit(font,(0,0))
     continuer = 1
     while continuer:
         for event in pygame.event.get():
@@ -26,12 +30,13 @@ def demande_de_nom():
                     nom_joueur = nom_joueur[:-1]
                 else:
                     nom_joueur += event.unicode
-                aff_nom_joueur = arial.render(nom_joueur, True, vert) 
-        fenetre.fill((0,0,0))
+                aff_nom_joueur = arial.render(nom_joueur, True, rouge) 
+            
+        fenetre.blit(font,(0,0))
         fenetre.blit(prompt, (225,300))
         fenetre.blit(aff_nom_joueur, (700,300))
         pygame.display.flip()
-    
+    nom_joueur = nom_joueur[:-1]
     return(nom_joueur)
 def murs_colision(speed,position_perso) :
     hauteur_x = 1100
@@ -46,13 +51,19 @@ def murs_colision(speed,position_perso) :
         position_perso = position_perso.move(0,-speed)
     return position_perso
 
-def game_over(conteur,arial_font,fenetre,black) :
-
+def game_over(conteur,fenetre,nom_joueur) :
+    blanc= (255,255,255)
     score_finale=str(conteur)
-    aff_score_final = arial_font.render("Score : "+score_finale, True, black)   
-    affi_gam_over = pygame.image.load("partie_lilian\gameover.jpg").convert_alpha()
-    fenetre.blit(affi_gam_over,(150,50))
-    fenetre.blit(aff_score_final,(500,550))
+    nom_joueur=str(nom_joueur)
+    arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
+    aff_nom = arial.render(nom_joueur, True, blanc)
+    aff_score_final = arial.render("Score : "+score_finale, True, blanc)   
+    affi_gam_over = pygame.image.load("partie_lilian\gameover-py-blast.jpg").convert_alpha()
+    fenetre.blit(affi_gam_over,(0,0))
+    fenetre.blit(aff_nom,(480,325))
+    fenetre.blit(aff_score_final,(450,375))
+
+
 def vie_coeur(point_vie,fenetre) :
     image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
     image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
@@ -64,11 +75,11 @@ def vie_coeur(point_vie,fenetre) :
         if point_vie>=2:
             fenetre.blit(image_coeur2,(972,8))
             if point_vie>=3:
-                fenetre.blit(image_coeur3,(1010,8))
-                if point_vie>=4:
-                    fenetre.blit(image_coeur4,(1045,8))
-                    if point_vie>=5:
-                        fenetre.blit(image_coeur5,(1080,8))
+                    fenetre.blit(image_coeur3,(1010,8))
+                    if point_vie>=4:
+                        fenetre.blit(image_coeur4,(1045,8))
+                        if point_vie>=5:
+                            fenetre.blit(image_coeur5,(1080,8))
 
 def gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision):
     clock.tick(ips)             # gauche
@@ -79,8 +90,6 @@ def gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,mur
             
     position_perso = murs_colision(speed,position_perso)   
             
-               
-    
     return(position_perso)
 
 def droite(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision):

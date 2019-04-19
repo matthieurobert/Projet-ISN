@@ -150,8 +150,8 @@ class FolBot(pygame.sprite.Sprite):
 		self.rect = self.rect.move(1, 0)
 	def stop(self):
 		self.rect = self.rect.move(0,0)
-
-nom_joeur = demande_de_nom()
+nom_joueur=str
+nom_joueur = demande_de_nom()
 les_variable = variable()
 black = les_variable[0]
 rouge = les_variable[1]
@@ -168,7 +168,7 @@ ips = les_variable[11]
 hauteur_x = les_variable[12]
 hauteur_y = les_variable[13]
 aff_crono = les_variable[14]
-nom_joeur=str
+
 clock = pygame.time.Clock()
 pygame.display.flip()
 alien = ARBot()
@@ -294,7 +294,7 @@ try:
                         pygame.display.flip()
                     if point_vie == 0 :
                         continuer2 = 0
-        game_over(conteur,arial_font,fenetre,black)
+        game_over(conteur,fenetre,nom_joueur)
 
         while continuer3:
             for evenement in pygame.event.get():
