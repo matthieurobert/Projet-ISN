@@ -184,7 +184,7 @@ continuer3 = 1
 
 try:
     while continuer :
-        
+
         pygame.key.set_repeat(50,15)
         while continuer2:
             for event in pygame.event.get():
@@ -292,8 +292,8 @@ try:
                         fenetre.blit( follower.image,follower.rect)
                         fenetre.blit( pab.image, pab.rect)
                         pygame.display.flip()
-                    if point_vie == 0 :
-                        continuer2 = 0
+            if point_vie == 0 :
+                continuer2 = 0
         game_over(conteur,fenetre,nom_joueur)
 
         while continuer3:
