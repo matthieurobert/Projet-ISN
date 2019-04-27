@@ -15,7 +15,7 @@ def salle():                                                                    
     fenetre = pygame.display.set_mode((1145,720))                                # initialisation de pygame et de la fenêtre
 
 
-    table = pygame.image.load("Partie_Clément/images/salle.png").convert()       # on affiche le fond
+    table = pygame.image.load("Test_Matthieu/map.png").convert()       # on affiche le fond
     fenetre.blit(table, (0,0))
 
 
