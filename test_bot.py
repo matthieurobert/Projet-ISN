@@ -7,6 +7,7 @@ from Partie_Clément.liste_x_y_bot import liste
 from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom
 from partie_lilian.variable import variable
 from random import randrange
+from Partie_Clément.musique import musique_blesse
 
 pygame.init()
 
@@ -44,7 +45,7 @@ class ARBot(pygame.sprite.Sprite):
 
 
 	def update(self):
-		if self.rect.left < 0 or self.rect.right > 1095:
+		if self.rect.left < 0 or self.rect.right > 1115:
 			self.speed[1] = -self.speed[1]
 
 		for d in range (0,len(rekt_boîte)):
@@ -184,7 +185,7 @@ continuer3 = 1
 
 try:
     while continuer :
-        
+
         pygame.key.set_repeat(50,15)
         while continuer2:
             for event in pygame.event.get():
@@ -193,6 +194,7 @@ try:
             if follower.rect.colliderect(position_perso):
                 follower.stop()
                 point_vie = point_vie - 1
+                musique_blesse()
                 r = randrange(1,18)
                 follower.rect= pygame.Rect(bot_x_y[r])
                 pab.rect= pygame.Rect(bot_x_y[r+1])
@@ -216,6 +218,7 @@ try:
 
             if pab.rect.colliderect(position_perso):
                 point_vie = point_vie - 1
+                musique_blesse()
                 r = randrange(1,18)
                 follower.rect= pygame.Rect(bot_x_y[r])
                 pab.rect= pygame.Rect(bot_x_y[r+1])
@@ -286,14 +289,16 @@ try:
 
                     if event.key == K_v :
                         point_vie = point_vie - 1
+                        musique_blesse()
                         r = randrange(1,18)
                         follower.rect= pygame.Rect(bot_x_y[r])
                         pab.rect= pygame.Rect(bot_x_y[r+1])
                         fenetre.blit( follower.image,follower.rect)
                         fenetre.blit( pab.image, pab.rect)
                         pygame.display.flip()
-                    if point_vie == 0 :
-                        continuer2 = 0
+            if point_vie == 0 :
+                continuer2 = 0
+
         game_over(conteur,fenetre,nom_joueur)
 
         while continuer3:
