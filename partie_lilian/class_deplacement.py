@@ -1,71 +1,47 @@
 import pygame
-import time
-from pygame.locals import*
+from pygame.locals import *
 
 pygame.init()
 
-#affichage de la fenêtre
+#Ouverture de la fenêtre Pygame
+fenetre = pygame.display.set_mode((640, 480))
 
-
-
-
-class Bat(pygame.sprite.Sprite):
-    
-    def __init__(self, side):
-        pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_png('perso.jpg')
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
-        self.side = side
-        self.speed = 10
-        self.state = "still"
-        self.reinit()
-
-    def reinit(self):
-        self.state = "still"
-        self.movepos = [0,0]
-        if self.side == "left":
-            self.rect.midleft = self.area.midleft
-        elif self.side == "right":
-            self.rect.midright = self.area.midright
-
-    def update(self):
-        newpos = self.rect.move(self.movepos)
-        if self.area.contains(newpos):
-            self.rect = newpos
-        pygame.event.pump()
-
-    def moveup(self):
-        self.movepos[1] = self.movepos[1] - (self.speed)
-        self.state = "moveup"
-
-    def movedown(self):
-        self.movepos[1] = self.movepos[1] + (self.speed)
-        self.state = "movedown"
-font = pygame.display.set_mode((1000, 600))
-
+#Chargement et collage du fond
 fond = pygame.image.load("background.jpg").convert()
-continuer1 = 1
+fenetre.blit(fond, (0,0))
 
-player = Bat()
+#Chargement et collage du personnage
+perso = pygame.image.load("perso.png").convert_alpha()
 
+fenetre.blit(perso, (200,300))
 
-while continuer1:
-    for evenement in pygame.event.get():
-        if evenement.type == QUIT:
-            continuer1 = 0
-        elif evenement.type == KEYDOWN:
-            if evenement.key == K_UP:
-                player.moveup()
-            if evenement.key == K_DOWN:
-        	    player.movedown()
-        elif evenement.type == KEYUP:
-      	  if evenement.key == K_UP or event.key == K_DOWN:
-          		player.movepos = [0,0]
-                
+#Rafraîchissement de l'écran
+pygame.display.flip()
 
-    pygame.font.init()
-    pygame.display.flip()
+#BOUCLE INFINIE
+continuer = 1
+while continuer:
+	continuer = int(input())
+import pygame
+from pygame.locals import *
 
+pygame.init()
 
-pygame.quit()
+#Ouverture de la fenêtre Pygame
+fenetre = pygame.display.set_mode((640, 480))
+
+#Chargement et collage du fond
+fond = pygame.image.load("partie_lilian\background.jpg").convert()
+fenetre.blit(fond, (0,0))
+
+#Chargement et collage du personnage
+perso = pygame.image.load("partie_lilian\perso.png").convert()
+fenetre.blit(perso, (200,300))
+
+#Rafraîchissement de l'écran
+pygame.display.flip()
+
+#BOUCLE INFINIE
+continuer = 1
+while continuer:
+	continuer = int(input())
