@@ -8,6 +8,9 @@ from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauc
 from partie_lilian.variable import variable
 from random import randrange
 from Partie_Clément.musique import musique_blesse
+from Partie_Clément.musique import musique_tir
+from Partie_Clément.musique import musique_fin
+from Partie_Clément.musique import musique_fond
 
 pygame.init()
 
@@ -188,6 +191,7 @@ try:
 
         pygame.key.set_repeat(50,15)
         while continuer2:
+
             for event in pygame.event.get():
               if event.type == pygame.QUIT:
                     pygame.quit()
@@ -256,7 +260,6 @@ try:
             conteur = liste_crono[1]
 
 
-
             for event in pygame.event.get():
 
                 if event.type == QUIT:
@@ -298,19 +301,26 @@ try:
                         pygame.display.flip()
             if point_vie == 0 :
                 continuer2 = 0
+                continuer3 = 1
+
 
         game_over(conteur,fenetre,nom_joueur)
-
+        musique_fin()
         while continuer3:
-            for evenement in pygame.event.get():
-                if evenement.type == QUIT:
+            for event in pygame.event.get():
+                if event.type == QUIT:
 
                     continuer3 = 0
                     pygame.display.quit()
-                if event.key == KEYDOWN:
+                if event.type == KEYDOWN:
                     if event.key == K_r:
-                        continuer3 = 0
+                        point_vie = 3
                         continuer2 = 1
+                        continuer3=0
+                        fenetre.blit(perso,(0,0))
+                        pygame.display.flip()
+
+
 
             pygame.display.flip()
             pygame.font.init()
