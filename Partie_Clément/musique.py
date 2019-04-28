@@ -1,22 +1,19 @@
 import pygame
 from pygame.locals import *
 
-#Initialisation
-pygame.init()
-fenetre = pygame.display.set_mode((300,300))
-son = pygame.mixer.Sound("C:\\Users\\Clément\\Documents\\GitHub\\Projet-ISN\\Partie_Clément\\musique_fond\\tir.wav")
+def musique_blesse():
 
-continuer = 1 #Variable de boucle
-joue = 0 #1 si le son a été mis en pause
-pygame.display.flip()
-while continuer:
-
-    for event in pygame.event.get():
-        son.play(loops=-1, maxtime=0,fade_ms=0)
+    pygame.mixer.stop()
+    tir = pygame.mixer.Sound(r"C:\Users\Clément\Documents\GitHub\Projet-ISN\Partie_Clément\musique_fond\\Meme_cri.wav")
+    loops = 0
+    tir.play(loops, maxtime=0,fade_ms=0)
 
 
+def musique_tir():
 
-        if event.type == QUIT:
+    pygame.mixer.stop()
+    tir = pygame.mixer.Sound(r"C:\\Users\\Clément\\Documents\\GitHub\\Projet-ISN\\Partie_Clément\\musique_fond\\tir.wav")
+    loops = 0
+    tir.play(loops, maxtime=0,fade_ms=0)
 
-            pygame.quit()
-    cleanup()
+
