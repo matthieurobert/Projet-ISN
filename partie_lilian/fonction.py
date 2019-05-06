@@ -6,7 +6,7 @@ from random import randrange
 def demande_de_nom():
     pygame.init()
     fenetre = pygame.display.set_mode((1145,720))
-    font = pygame.image.load("partie_lilian/py-blast-accuil.png")
+    font = pygame.image.load("partie_lilian/PY-BLAST(3).png").convert_alpha()
     bleu = (40, 120, 230)
     vert = (40, 230, 120)
     noir = (0, 0, 0)
