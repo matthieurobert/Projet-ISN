@@ -4,7 +4,7 @@ import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from Partie_Clément.liste_x_y_bot import liste
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom,generatrice_nom
 from partie_lilian.variable import variable
 from random import randrange
 from Partie_Clément.musique import musique_blesse
@@ -95,7 +95,7 @@ class Pojectiles(pygame.sprite.Sprite):
         self.rect = position_perso
         self.posinit = position_perso
         self.alive = 1
-
+        
     def droite(self):
         self.rect = self.rect.move(4,0)
         for d in range (0, len(rekt_boîte)):
@@ -179,6 +179,7 @@ alien = ARBot()
 pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
+balle1 = Projectiles()
 
 pygame.display.flip
 
@@ -247,8 +248,9 @@ try:
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
             fenetre.blit( follower.image, follower.rect)
+            # Projectile
             if balle.alive :
-                fenetre.blit( balle.image, balle.rect)
+                fenetre.blit( balle.image, balle.rect) 
 
             pab.update()
             balle.droite()
