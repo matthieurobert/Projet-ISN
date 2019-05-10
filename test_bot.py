@@ -4,7 +4,7 @@ import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from Partie_Clément.liste_x_y_bot import liste
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom,generatrice_nom
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom
 from partie_lilian.variable import variable
 from random import randrange
 from Partie_Clément.musique import musique_blesse
