@@ -169,12 +169,18 @@ hauteur_x = les_variable[12]
 hauteur_y = les_variable[13]
 aff_crono = les_variable[14]
 
+bots = pygame.sprite.Group()
+
 clock = pygame.time.Clock()
 pygame.display.flip()
 bot = TBBot()
 pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
+
+bots.add(bot)
+bots.add(pab)
+bots.add(follower)
 
 pygame.display.flip
 
