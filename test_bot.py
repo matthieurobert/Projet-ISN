@@ -12,6 +12,7 @@ from Partie_Clément.musique import musique_tir
 from Partie_Clément.musique import musique_fin
 from Partie_Clément.musique import musique_fond
 
+
 pygame.init()
 
 bot_x_y = liste()

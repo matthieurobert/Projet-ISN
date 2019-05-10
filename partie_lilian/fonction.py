@@ -6,38 +6,43 @@ from random import randrange
 def demande_de_nom():
     pygame.init()
     fenetre = pygame.display.set_mode((1145,720))
-    font = pygame.image.load("partie_lilian/PY-BLAST(3).png").convert_alpha()
-    bleu = (40, 120, 230)
-    vert = (40, 230, 120)
-    noir = (0, 0, 0)
-    rouge = (255, 0, 0)
-    arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
-    prompt = arial.render('Entrez votre pseuso : ', True, noir)
-    nom_joueur = ""
-    aff_nom_joueur = arial.render(nom_joueur, True, rouge)
-    fenetre.blit(font,(0,0))
-    continuer = 1
-    while continuer:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                continuer = 0
-            
-            if event.type == pygame.KEYDOWN:
-                if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
-                    continuer = 0
-               
-                if event.key == pygame.K_BACKSPACE:
-                    nom_joueur = nom_joueur[:-1]
-                else:
-                    nom_joueur += event.unicode
-                aff_nom_joueur = arial.render(nom_joueur, True, rouge) 
-            
-        fenetre.blit(font,(0,0))
-        fenetre.blit(prompt, (225,300))
-        fenetre.blit(aff_nom_joueur, (700,300))
-        pygame.display.flip()
-    nom_joueur = nom_joueur[:-1]
-    return(nom_joueur)
+    menu = pygame.image.load("partie_lilian/Main.png")
+    fenetre.blit(menu,(0,0))
+    for event in pygame.event.get():
+        if event.type == MOUSEBUTTONDOWN:
+            if event.button == 1 and 300 <= event.pos[0] <= 800 and 330 <= event.pos[1] <= 450:
+                font = pygame.image.load("partie_lilian/Enter_pseudo.png").convert_alpha()
+                bleu = (40, 120, 230)
+                vert = (40, 230, 120)
+                noir = (0, 0, 0)
+                rouge = (255, 0, 0)
+                arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
+                prompt = arial.render('Entrez votre pseuso : ', True, noir)
+                nom_joueur = ""
+                aff_nom_joueur = arial.render(nom_joueur, True, rouge)
+                fenetre.blit(font,(0,0))
+                continuer = 1
+                while continuer:
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            continuer = 0
+                        
+                        if event.type == pygame.KEYDOWN:
+                            if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                                continuer = 0
+                        
+                            if event.key == pygame.K_BACKSPACE:
+                                nom_joueur = nom_joueur[:-1]
+                            else:
+                                nom_joueur += event.unicode
+                            aff_nom_joueur = arial.render(nom_joueur, True, rouge) 
+                        
+                    fenetre.blit(font,(0,0))
+                    fenetre.blit(prompt, (225,300))
+                    fenetre.blit(aff_nom_joueur, (700,300))
+                    pygame.display.flip()
+                nom_joueur = nom_joueur[:-1]
+                return(nom_joueur)
 def murs_colision(speed,position_perso) :
     hauteur_x = 1100
     hauteur_y= 675
