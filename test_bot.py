@@ -177,7 +177,7 @@ bot = TBBot()
 pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
-balle1 = Projectiles()
+
 
 bots.add(bot)
 bots.add(pab)
