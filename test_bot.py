@@ -47,7 +47,7 @@ class TBBot(pygame.sprite.Sprite):
 
 
 	def update(self):
-		if self.rect.left < 0 or self.rect.right > 680:
+		if self.rect.top < 0 or self.rect.bottom > 680:
 			self.speed[1] = -self.speed[1]
 
 		for d in range (0,len(rekt_boîte)):
