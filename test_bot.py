@@ -169,6 +169,8 @@ hauteur_x = les_variable[12]
 hauteur_y = les_variable[13]
 aff_crono = les_variable[14]
 
+bots = pygame.sprite.Group()
+
 clock = pygame.time.Clock()
 pygame.display.flip()
 bot = TBBot()
@@ -176,6 +178,10 @@ pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
 balle1 = Projectiles()
+
+bots.add(bot)
+bots.add(pab)
+bots.add(follower)
 
 pygame.display.flip
 
@@ -195,10 +201,11 @@ try:
             if follower.rect.colliderect(position_perso):
                 follower.stop()
                 point_vie = point_vie - 1
-                musique_blesse()
-                r = randrange(1,18)
-                follower.rect= pygame.Rect(bot_x_y[r])
-                pab.rect= pygame.Rect(bot_x_y[r+1])
+                if point_vie != 0:
+                    musique_blesse()
+                rand = randrange(1,18)
+                follower.rect= pygame.Rect(bot_x_y[rand])
+                pab.rect= pygame.Rect(bot_x_y[rand+1])
                 fenetre.blit( follower.image,follower.rect)
                 fenetre.blit( pab.image, pab.rect)
             elif abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
@@ -219,10 +226,11 @@ try:
 
             if pab.rect.colliderect(position_perso):
                 point_vie = point_vie - 1
-                musique_blesse()
-                r = randrange(1,18)
-                follower.rect= pygame.Rect(bot_x_y[r])
-                pab.rect= pygame.Rect(bot_x_y[r+1])
+                if point_vie != 0:
+                    musique_blesse()
+                rand = randrange(1,18)
+                follower.rect= pygame.Rect(bot_x_y[rand])
+                pab.rect= pygame.Rect(bot_x_y[rand+1])
                 fenetre.blit( follower.image,follower.rect)
                 fenetre.blit( pab.image, pab.rect)
 
