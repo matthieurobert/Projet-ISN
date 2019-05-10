@@ -1,11 +1,11 @@
 import pygame
 import random
 
-WIDTH = 480
-HEIGHT = 600
+WIDTH = 1000
+HEIGHT = 700
 FPS = 60
 
-# define colors
+
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -13,7 +13,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
-# initialize pygame and create window
+
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -36,6 +36,7 @@ class Player(pygame.sprite.Sprite):
             self.speedx = -8
         if keystate[pygame.K_RIGHT]:
             self.speedx = 8
+        
         self.rect.x += self.speedx
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
@@ -64,7 +65,7 @@ class Mob(pygame.sprite.Sprite):
             self.rect.x = random.randrange(WIDTH - self.rect.width)
             self.rect.y = random.randrange(-100, -40)
             self.speedy = random.randrange(1, 8)
-            
+
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -73,13 +74,31 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.bottom = y
         self.rect.centerx = x
-        self.speedy = -10
+        self.speedymonter = -10
+        self.speedydecendre = 10
+        self.speedxgauche = -10
+        self.speedxdroite = 10
 
-    def update(self):
-        self.rect.y += self.speedy
-        # kill if it moves off the top of the screen
+    def haut(self):
+        self.rect.y += self.speedymonter       
         if self.rect.bottom < 0:
             self.kill()
+    def bas(self):
+        self.rect.y += self.speedydecendre
+        if self.rect.bottom < 0:
+            self.kill()
+    def droite(self):
+        self.rect.x += self.speedxdroite
+        if self.rect.bottom < 0:
+            self.kill()
+    def gauche(self):
+        self.rect.y += self.speedxgauche
+        if self.rect.bottom < 0:
+            self.kill()          
+
+
+
+
 
 all_sprites = pygame.sprite.Group()
 mobs = pygame.sprite.Group()
