@@ -14,6 +14,8 @@ from Partie_Clément.musique import musique_fond
 
 
 pygame.init()
+nom_joueur=str
+nom_joueur = demande_de_nom()
 
 bot_x_y = liste()
 rekt_boîte = rekt()
@@ -92,7 +94,7 @@ class Pojectiles(pygame.sprite.Sprite):
         self.rect = position_perso
         self.posinit = position_perso
         self.alive = 1
-        
+
     def droite(self):
         self.rect = self.rect.move(4,0)
         for d in range (0, len(rekt_boîte)):
@@ -151,8 +153,7 @@ class FolBot(pygame.sprite.Sprite):
 		self.rect = self.rect.move(1, 0)
 	def stop(self):
 		self.rect = self.rect.move(0,0)
-nom_joueur=str
-nom_joueur = demande_de_nom()
+
 les_variable = variable()
 black = les_variable[0]
 rouge = les_variable[1]
@@ -256,7 +257,7 @@ try:
             fenetre.blit( follower.image, follower.rect)
             # Projectile
             if balle.alive :
-                fenetre.blit( balle.image, balle.rect) 
+                fenetre.blit( balle.image, balle.rect)
 
             pab.update()
             bot.update()
