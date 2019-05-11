@@ -36,8 +36,6 @@ position_perso = perso.get_rect()
 
 class TBBot(pygame.sprite.Sprite):
 
-
-
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
 		self.image = pygame.image.load("Test_Matthieu/sprite2.png")
@@ -60,8 +58,6 @@ class TBBot(pygame.sprite.Sprite):
 		self.rect = self.rect.move(self.speed)
 
 class LRBot(pygame.sprite.Sprite):
-
-
 
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
@@ -86,6 +82,44 @@ class LRBot(pygame.sprite.Sprite):
 
 
 		#print(self.speed)
+
+class RBot(pygame.sprite.Sprite):
+
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.image.load("Test_Matthieu/sprite.png")
+		screen = pygame.display.get_surface()
+		self.area = screen.get_rect()
+		self.rect = pygame.Rect(0,500,50,50)
+		self.speed = [1, 0]
+		self.update()
+
+
+	def update(self):
+		if self.rect.left < 0 or self.rect.right > 1095:
+			if self.speed == [1,0]:
+				self.speed = [0,1]
+			elif self.speed == [0,1]:
+				self.speed = [-1,0]
+			elif self.speed == [-1,0]:
+				self.speed = [0,-1]
+			elif self.speed == [0,-1]:
+				self.speed = [1,0]
+
+		for d in range (0,len(rekt_boîte)):
+
+			if self.rect.colliderect(rekt_boîte[d]):
+				if self.speed == [1,0]:
+					self.speed = [0,1]
+				elif self.speed == [0,1]:
+					self.speed = [-1,0]
+			 	elif self.speed == [-1,0]:
+					self.speed = [0,-1]
+				elif self.speed == [0,-1]:
+					self.speed = [1,0]
+
+		print(self.speed)
+		self.rect = self.rect.move(self.speed)
 
 class Pojectiles(pygame.sprite.Sprite):
     def __init__(self):
@@ -179,11 +213,13 @@ bot = TBBot()
 pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
+rand = RBot()
 
 
 bots.add(bot)
 bots.add(pab)
 bots.add(follower)
+bots.add(rand)
 
 pygame.display.flip
 
@@ -252,6 +288,7 @@ try:
 
             fenetre.blit( pab.image, pab.rect)
             fenetre.blit( bot.image, bot.rect)
+            fenetre.blit( rand.image, rand.rect)
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
             fenetre.blit( follower.image, follower.rect)
@@ -261,6 +298,7 @@ try:
 
             pab.update()
             bot.update()
+            rand.update()
             balle.droite()
             follower.update()
             pygame.display.flip()

@@ -23,7 +23,6 @@ def demande_de_nom():
     noir = (0, 0, 0)
     rouge = (255, 0, 0)
     arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
-    prompt = arial.render('Entrez votre pseuso : ', True, noir)
     nom_joueur = ""
     aff_nom_joueur = arial.render(nom_joueur, True, rouge)
     fenetre.blit(font,(0,0))
@@ -46,8 +45,7 @@ def demande_de_nom():
                 aff_nom_joueur = arial.render(nom_joueur, True, rouge)
 
         fenetre.blit(font,(0,0))
-        fenetre.blit(prompt, (225,300))
-        fenetre.blit(aff_nom_joueur, (700,300))
+        fenetre.blit(aff_nom_joueur, (400,300))
         pygame.display.flip()
     nom_joueur = nom_joueur[:-1]
     return(nom_joueur)
