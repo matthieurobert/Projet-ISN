@@ -190,7 +190,7 @@ pygame.display.flip
 continuer = 1
 continuer2 = 1
 continuer3 = 1
-
+musique_fond()
 try:
     while continuer :
 
@@ -329,6 +329,7 @@ try:
                         continuer3=0
                         fenetre.blit(perso,(0,0))
                         pygame.display.flip()
+                        musique_fond()
 
 
 

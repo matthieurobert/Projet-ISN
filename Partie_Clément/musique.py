@@ -3,7 +3,7 @@ from pygame.locals import *
 
 def musique_blesse():
 
-    pygame.mixer.stop()
+
     blesse = pygame.mixer.Sound(r"Partie_Clément/musique_fond/Meme_cri.wav")
     loops = 0
     blesse.play(loops, maxtime=0,fade_ms=0)
@@ -11,7 +11,7 @@ def musique_blesse():
 
 def musique_tir():
 
-    pygame.mixer.stop()
+
     tir = pygame.mixer.Sound(r"Partie_Clément/musique_fond/tir.wav")
     loops = 0
     tir.play(loops, maxtime=0,fade_ms=0)
@@ -26,6 +26,6 @@ def musique_fin():
 def musique_fond():
 
     pygame.mixer.stop()
-    fond = pygame.mixer.Sound(r"Partie_Clément/musique_fond/Ozzed_-_World_Nap.wav")
-    loops = 0
-    fond.play(loops, maxtime=0,fade_ms=0)
+    fond = pygame.mixer.Sound(r"Partie_Clément/musique_fond/Ozzed_-_World_Nap2.wav")
+    loops = -1
+    fond.play(loops, maxtime=0,fade_ms=1000)
