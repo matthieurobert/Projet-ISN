@@ -85,41 +85,40 @@ class LRBot(pygame.sprite.Sprite):
 
 class RBot(pygame.sprite.Sprite):
 
-	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = pygame.Rect(0,500,50,50)
-		self.speed = [1, 0]
-		self.update()
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("Test_Matthieu/sprite.png")
+        screen = pygame.display.get_surface()
+        self.area = screen.get_rect()
+        self.rect = pygame.Rect(0,500,50,50)
+        self.speed = [1, 0]
+        self.update()
 
 
-	def update(self):
-		if self.rect.left < 0 or self.rect.right > 1095:
-			if self.speed == [1,0]:
-				self.speed = [0,1]
-			elif self.speed == [0,1]:
-				self.speed = [-1,0]
-			elif self.speed == [-1,0]:
-				self.speed = [0,-1]
-			elif self.speed == [0,-1]:
-				self.speed = [1,0]
+    def update(self):
+        if self.rect.left < 0 or self.rect.right > 1095:
+            if self.speed == [1,0]:
+                self.speed = [0,1]
+            elif self.speed == [0,1]:
+                self.speed = [-1,0]
+            elif self.speed == [-1,0]:
+                self.speed = [0,-1]
+            elif self.speed == [0,-1]:
+                self.speed = [1,0]
 
-		for d in range (0,len(rekt_boîte)):
+        for d in range (0,len(rekt_boîte)):
 
-			if self.rect.colliderect(rekt_boîte[d]):
-				if self.speed == [1,0]:
-					self.speed = [0,1]
-				elif self.speed == [0,1]:
-					self.speed = [-1,0]
-			 	elif self.speed == [-1,0]:
-					self.speed = [0,-1]
-				elif self.speed == [0,-1]:
-					self.speed = [1,0]
+            if self.rect.colliderect(rekt_boîte[d]):
+                if self.speed == [1,0]:
+                    self.speed = [0,1]
+                elif self.speed == [0,1]:
+                    self.speed = [-1,0]
+                elif self.speed == [-1,0]:
+                    self.speed = [0,-1]
+                elif self.speed == [0,-1]:
+                    self.speed = [1,0]
 
-		print(self.speed)
-		self.rect = self.rect.move(self.speed)
+        self.rect = self.rect.move(self.speed)
 
 class Pojectiles(pygame.sprite.Sprite):
     def __init__(self):
@@ -175,16 +174,16 @@ class FolBot(pygame.sprite.Sprite):
 
 
 	def bas(self):
-		self.rect = self.rect.move(0, 1)
+		self.rect = self.rect.move(0, 2)
 
 	def haut(self):
-		self.rect = self.rect.move(0, -1)
+		self.rect = self.rect.move(0, -2)
 
 	def gauche(self):
-		self.rect = self.rect.move(-1, 0)
+		self.rect = self.rect.move(-2, 0)
 
 	def droite(self):
-		self.rect = self.rect.move(1, 0)
+		self.rect = self.rect.move(2, 0)
 	def stop(self):
 		self.rect = self.rect.move(0,0)
 
@@ -213,13 +212,13 @@ bot = TBBot()
 pab = LRBot()
 follower = FolBot()
 balle = Pojectiles()
-rand = RBot()
+ran = RBot()
 
 
 bots.add(bot)
 bots.add(pab)
 bots.add(follower)
-bots.add(rand)
+bots.add(ran)
 
 pygame.display.flip
 
@@ -227,7 +226,7 @@ continuer = 1
 continuer2 = 1
 continuer3 = 1
 musique_fond()
-try:
+try :
     while continuer :
 
         pygame.key.set_repeat(50,15)
@@ -288,7 +287,7 @@ try:
 
             fenetre.blit( pab.image, pab.rect)
             fenetre.blit( bot.image, bot.rect)
-            fenetre.blit( rand.image, rand.rect)
+            fenetre.blit( ran.image, ran.rect)
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
             fenetre.blit( follower.image, follower.rect)
@@ -298,7 +297,7 @@ try:
 
             pab.update()
             bot.update()
-            rand.update()
+            ran.update()
             balle.droite()
             follower.update()
             pygame.display.flip()
@@ -374,10 +373,9 @@ try:
             pygame.display.flip()
             pygame.font.init()
 
-except:
+except :
     traceback.print_exc()
 
 finally:
-
     pygame.quit()
     exit()
