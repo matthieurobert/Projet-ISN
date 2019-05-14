@@ -4,7 +4,7 @@ import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from Partie_Clément.liste_x_y_bot import liste
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom,generatrice_nom
 from partie_lilian.variable import variable
 from random import randrange
 from Partie_Clément.musique import musique_blesse
@@ -163,31 +163,33 @@ class FolBot(pygame.sprite.Sprite):
 
 
 
-	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite4.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = pygame.Rect(400,200,50,50)
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("Test_Matthieu/sprite4.png")
+        screen = pygame.display.get_surface()
+        self.area = screen.get_rect()
+        self.rect = pygame.Rect(400,200,50,50)
 		#self.side = side
 		#self.speed = 10
-		self.state = "still"
+        self.state = "still"
 
 
 
-	def bas(self):
-		self.rect = self.rect.move(0, 2)
+    def bas(self):
+        self.rect = self.rect.move(0, 1)
 
-	def haut(self):
-		self.rect = self.rect.move(0, -2)
-
-	def gauche(self):
-		self.rect = self.rect.move(-2, 0)
-
-	def droite(self):
-		self.rect = self.rect.move(2, 0)
-	def stop(self):
-		self.rect = self.rect.move(0,0)
+        
+    def haut(self):
+        self.rect = self.rect.move(0, -1)
+     
+    def gauche(self):
+        self.rect = self.rect.move(-1, 0)
+       
+    def droite(self):
+        self.rect = self.rect.move(1, 0)
+        
+    def stop(self):
+        self.rect = self.rect.move(0,0)
 
 les_variable = variable()
 black = les_variable[0]
@@ -300,7 +302,12 @@ try :
             # Projectile
             if balle.alive :
                 fenetre.blit( balle.image, balle.rect)
-
+            liste_projectile=[]
+            if conteur == 10 :
+                new_projectile = generatrice_nom()
+                new_projectile = Pojectiles()
+                new_projectile.droite()
+                liste_projectile.append(new_projectile)
             pab.update()
             pab2.update()
             bot.update()
