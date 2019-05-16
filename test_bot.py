@@ -30,7 +30,12 @@ table = liste[1]
 caisse = liste[2]
 caisses = liste[3]
 position_x_y = liste[4]
-
+epper_haut = pygame.image.load("partie_lilian\eper_haut.png").convert()
+"""
+epper_bas = pygame.image.load("partie_lilian\eper_bas.png").convert()
+epper_droite = pygame.image.load("partie_lilian\eper_droite.png").convert()
+epper_gauche = pygame.image.load("partie_lilian\eper_gauche.png").convert()
+"""
 perso = pygame.image.load("perso.jpg").convert()
 position_perso = perso.get_rect()
 
@@ -344,6 +349,26 @@ try :
 
                         pygame.display.flip()
 
+                    if event.key == K_UP:                        
+                        fenetre.blit(epper_haut,((position_perso[0]+5),(position_perso[1]-65)))                       
+                        pygame.display.flip()
+                        pygame.display.flip()
+"""
+                    if event.key == K_DOWN:                        
+                        fenetre.blit(epper_bas,((position_perso[0]+5),(position_perso[1]+50)))                       
+                        pygame.display.flip()
+                        pygame.display.flip()
+
+                    if event.key == K_RIGHT:                        
+                        fenetre.blit(epper_droite,((position_perso[0]+50),(position_perso[1]+5)))                       
+                        pygame.display.flip()
+                        pygame.display.flip()
+
+                    if event.key == K_LEFT:                        
+                        fenetre.blit(epper_gauche,((position_perso[0]-65),(position_perso[1]+5)))                       
+                        pygame.display.flip()
+                        pygame.display.flip()
+"""
                     if event.key == K_v :
                         point_vie = point_vie - 1
                         musique_blesse()
