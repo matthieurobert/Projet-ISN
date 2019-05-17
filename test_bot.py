@@ -76,7 +76,7 @@ class LRBot(pygame.sprite.Sprite):
 
 
     def update(self):
-        if self.rect.left < 0 or self.rect.right > 1095:
+        if self.rect.left < 5 or self.rect.right > 1139:
             self.speed[0] = -self.speed[0]
 
         for d in range (0,len(rekt_boîte)):
@@ -182,16 +182,16 @@ class FolBot(pygame.sprite.Sprite):
     def bas(self):
         self.rect = self.rect.move(0, 1)
 
-        
+
     def haut(self):
         self.rect = self.rect.move(0, -1)
-     
+
     def gauche(self):
         self.rect = self.rect.move(-1, 0)
-       
+
     def droite(self):
         self.rect = self.rect.move(1, 0)
-        
+
     def stop(self):
         self.rect = self.rect.move(0,0)
 
@@ -355,23 +355,23 @@ try :
 
                         pygame.display.flip()
 
-                    if event.key == K_UP:                        
-                        fenetre.blit(epper_haut,((position_perso[0]+5),(position_perso[1]-65)))                       
+                    if event.key == K_UP:
+                        fenetre.blit(epper_haut,((position_perso[0]+5),(position_perso[1]-65)))
                         pygame.display.flip()
                         pygame.display.flip()
 
-                    if event.key == K_DOWN:                        
-                        fenetre.blit(epper_bas,((position_perso[0]+5),(position_perso[1]+50)))                       
+                    if event.key == K_DOWN:
+                        fenetre.blit(epper_bas,((position_perso[0]+5),(position_perso[1]+50)))
                         pygame.display.flip()
                         pygame.display.flip()
 
-                    if event.key == K_RIGHT:                        
-                        fenetre.blit(epper_droite,((position_perso[0]+50),(position_perso[1]+5)))                       
+                    if event.key == K_RIGHT:
+                        fenetre.blit(epper_droite,((position_perso[0]+50),(position_perso[1]+5)))
                         pygame.display.flip()
                         pygame.display.flip()
 
-                    if event.key == K_LEFT:                        
-                        fenetre.blit(epper_gauche,((position_perso[0]-65),(position_perso[1]+5)))                       
+                    if event.key == K_LEFT:
+                        fenetre.blit(epper_gauche,((position_perso[0]-65),(position_perso[1]+5)))
                         pygame.display.flip()
                         pygame.display.flip()
 
