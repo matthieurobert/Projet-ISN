@@ -51,13 +51,13 @@ def demande_de_nom():
     return(nom_joueur)
 
 def murs_colision(speed,position_perso) :
-    hauteur_x = 1100
-    hauteur_y= 675
-    if position_perso[0]<0:
+    hauteur_x = 1092
+    hauteur_y= 655
+    if position_perso[0]<1:
         position_perso = position_perso.move(speed,0)
     if position_perso[0]>hauteur_x:
         position_perso = position_perso.move(-speed,0)
-    if position_perso[1]<0:
+    if position_perso[1]<12:
         position_perso = position_perso.move(0,speed)
     if position_perso[1]>hauteur_y:
         position_perso = position_perso.move(0,-speed)
@@ -140,6 +140,7 @@ def chrono(depart,black):
     aff_crono = arial_font.render("Score : "+chiffre, True, black)
     liste_crono=[aff_crono,conteur]
     return (liste_crono)
+
 
 def generatrice_nom():
     nombre= randrange(0,26)

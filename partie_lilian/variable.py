@@ -11,7 +11,7 @@ def variable():
    chiffre=str(conteur)
    arial_font = pygame.font.SysFont("arial",30)
    point_vie = 3
-   speed =4
+   speed =8
    repouser = speed 
    aff_crono = arial_font.render("Score : "+chiffre, True, black)
    ips = 60

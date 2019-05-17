@@ -4,7 +4,7 @@ def save_score():
     from nom_score import nombre
 
 
-    with open('score.txt','a') as score:
+    with open('score.txt','r') as score:
 
         score.write(nom())
         score.write(' ')
