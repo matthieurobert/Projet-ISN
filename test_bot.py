@@ -76,7 +76,7 @@ class LRBot(pygame.sprite.Sprite):
 
 
     def update(self):
-        if self.rect.left < 0 or self.rect.right > 1095:
+        if self.rect.left < 5 or self.rect.right > 1139:
             self.speed[0] = -self.speed[0]
 
         for d in range (0,len(rekt_boîte)):
@@ -102,65 +102,39 @@ class RBot(pygame.sprite.Sprite):
 
 
     def update(self):
-        if self.rect.left < 0 or self.rect.right > 1095:
-            if self.speed == [1,0]:
-                self.speed = [0,1]
-            elif self.speed == [0,1]:
-                self.speed = [-1,0]
-            elif self.speed == [-1,0]:
-                self.speed = [0,-1]
-            elif self.speed == [0,-1]:
-                self.speed = [1,0]
+        if self.rect.left < 0:
+            self.haut()
+        elif self.rect.right > 1110:
+            self.bas()
+        elif self.rect.top < 0:
+            self.droite()
+        elif self.rect.bottom > 670:
+            self.gauche()
 
         for d in range (0,len(rekt_boîte)):
 
-            if self.rect.colliderect(rekt_boîte[d]):
-                if self.speed == [1,0]:
-                    self.speed = [0,1]
-                elif self.speed == [0,1]:
-                    self.speed = [-1,0]
-                elif self.speed == [-1,0]:
-                    self.speed = [0,-1]
-                elif self.speed == [0,-1]:
-                    self.speed = [1,0]
+            if self.rect.top == rekt_boîte[d].bottom:
+                self.droite()
+            elif self.rect.bottom == rekt_boîte[d].top:
+                self.gauche()
+            elif self.rect.left == rekt_boîte[d].right:
+                self.haut()
+            elif self.rect.right == rekt_boîte[d].left:
+                self.bas()
 
-        self.rect = self.rect.move(self.speed)
-
-class Pojectiles(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("Test_Matthieu/projectiles.png")
-        self.rect = position_perso
-        self.posinit = position_perso
-        self.alive = 1
-
-    def droite(self):
-        self.rect = self.rect.move(4,0)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
-
-    def gauche(self):
-        self.rect = self.rect.move(-2,0)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
 
     def haut(self):
-        self.rect = self.rect.move(0, -2)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
-
-    def bas(self):
-        self.rect = self.rect.move(0, 2)
-        for d in range (0, len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                self.alive = 0
-                self.kill()
+        self.speed == [0,-1]
+        self.rect = self.rect.move(self.speed)
+    def bas(self): 
+        self.speed == [0,1]
+        self.rect = self.rect.move(self.speed)
+    def gauche(self): 
+        self.speed == [-1,0]
+        self.rect = self.rect.move(self.speed)
+    def droite(self):
+        self.speed == [1, 0]
+        self.rect = self.rect.move(self.speed)
 
 
 class FolBot(pygame.sprite.Sprite):
@@ -182,16 +156,16 @@ class FolBot(pygame.sprite.Sprite):
     def bas(self):
         self.rect = self.rect.move(0, 1)
 
-        
+
     def haut(self):
         self.rect = self.rect.move(0, -1)
-     
+
     def gauche(self):
         self.rect = self.rect.move(-1, 0)
-       
+
     def droite(self):
         self.rect = self.rect.move(1, 0)
-        
+
     def stop(self):
         self.rect = self.rect.move(0,0)
 
@@ -220,7 +194,6 @@ bot = TBBot()
 pab = LRBot()
 pab2 = LRBot()
 follower = FolBot()
-balle = Pojectiles()
 ran = RBot()
 
 
@@ -303,9 +276,7 @@ try :
             fenetre.blit(perso,position_perso)
             fenetre.blit(aff_crono,(500,5))
             fenetre.blit( follower.image, follower.rect)
-            # Projectile
-            if balle.alive :
-                fenetre.blit( balle.image, balle.rect)
+            
             liste_projectile=[]
             if conteur == 10 :
                 new_projectile = generatrice_nom()
@@ -355,23 +326,23 @@ try :
 
                         pygame.display.flip()
 
-                    if event.key == K_UP:                        
-                        fenetre.blit(epper_haut,((position_perso[0]+5),(position_perso[1]-65)))                       
+                    if event.key == K_UP:
+                        fenetre.blit(epper_haut,((position_perso[0]+5),(position_perso[1]-65)))
                         pygame.display.flip()
                         pygame.display.flip()
 
-                    if event.key == K_DOWN:                        
-                        fenetre.blit(epper_bas,((position_perso[0]+5),(position_perso[1]+50)))                       
+                    if event.key == K_DOWN:
+                        fenetre.blit(epper_bas,((position_perso[0]+5),(position_perso[1]+50)))
                         pygame.display.flip()
                         pygame.display.flip()
 
-                    if event.key == K_RIGHT:                        
-                        fenetre.blit(epper_droite,((position_perso[0]+50),(position_perso[1]+5)))                       
+                    if event.key == K_RIGHT:
+                        fenetre.blit(epper_droite,((position_perso[0]+50),(position_perso[1]+5)))
                         pygame.display.flip()
                         pygame.display.flip()
 
-                    if event.key == K_LEFT:                        
-                        fenetre.blit(epper_gauche,((position_perso[0]-65),(position_perso[1]+5)))                       
+                    if event.key == K_LEFT:
+                        fenetre.blit(epper_gauche,((position_perso[0]-65),(position_perso[1]+5)))
                         pygame.display.flip()
                         pygame.display.flip()
 
