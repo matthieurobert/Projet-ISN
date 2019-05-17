@@ -1,7 +1,7 @@
 def nombre_caisse():
     from random import randrange # on créer une fonction qui donne un nombre
                                  # entre 5 et 14 ( c'est le nombre de caisses )
-    nombre = randrange(5,15)
+    nombre = randrange(14,15)
 
     return (nombre)
 

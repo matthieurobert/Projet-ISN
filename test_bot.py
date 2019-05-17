@@ -102,39 +102,27 @@ class RBot(pygame.sprite.Sprite):
 
 
     def update(self):
-        if self.rect.left < 0:
-            self.haut()
+        if self.rect.left < 5:
+            self.speed = [0, -1]
         elif self.rect.right > 1110:
-            self.bas()
-        elif self.rect.top < 0:
-            self.droite()
+            self.speed = [0, 1]
+        if self.rect.top < 0:
+            self.speed = [1, 0]
         elif self.rect.bottom > 670:
-            self.gauche()
+            self.speed = [-1, 0]
 
         for d in range (0,len(rekt_boîte)):
+            if self.rect.colliderect(rekt_boîte[d]):
+                if self.rect.top < rekt_boîte[d].bottom:
+                    self.speed = [1, 0]
+                if self.rect.bottom > rekt_boîte[d].top:
+                    self.speed = [-1, 0]
+                if self.rect.left < rekt_boîte[d].right:
+                    self.speed = [0, -1]
+                if self.rect.right > rekt_boîte[d].left:
+                    self.speed = [0, 1]
+        self.rect = self.rect.move(self.speed)
 
-            if self.rect.top == rekt_boîte[d].bottom:
-                self.droite()
-            elif self.rect.bottom == rekt_boîte[d].top:
-                self.gauche()
-            elif self.rect.left == rekt_boîte[d].right:
-                self.haut()
-            elif self.rect.right == rekt_boîte[d].left:
-                self.bas()
-
-
-    def haut(self):
-        self.speed == [0,-1]
-        self.rect = self.rect.move(self.speed)
-    def bas(self):
-        self.speed == [0,1]
-        self.rect = self.rect.move(self.speed)
-    def gauche(self):
-        self.speed == [-1,0]
-        self.rect = self.rect.move(self.speed)
-    def droite(self):
-        self.speed == [1, 0]
-        self.rect = self.rect.move(self.speed)
 
 
 class FolBot(pygame.sprite.Sprite):
