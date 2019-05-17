@@ -141,7 +141,7 @@ def chrono(depart,black):
     liste_crono=[aff_crono,conteur]
     return (liste_crono)
 
-def génératrice_nom():
+def generatrice_nom():
     nombre= randrange(0,26)
     lettre = ["a","b","e","r","t","y","u","i","o","p","q","s","d","f","g","h","j","k","l","m","w","x","c","v","b","n"]
     nombre2= randrange(0,9)
