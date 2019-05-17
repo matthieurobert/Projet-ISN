@@ -170,20 +170,38 @@ class FolBot(pygame.sprite.Sprite):
 		#self.side = side
 		#self.speed = 10
 		self.state = "still"
+		self.n = 0
 
 
 
 	def bas(self):
-		self.rect = self.rect.move(0, 2)
-
+		if self.n % 500 == 0:
+			self.rect = self.rect.move(0, 5)
+			self.n = self.n + 1
+		else:
+			self.rect = self.rect.move(0,1)
+			self.n = self.n + 1
 	def haut(self):
-		self.rect = self.rect.move(0, -2)
-
+		if self.n % 500 == 0:
+			self.rect = self.rect.move(0, -5)
+			self.n = self.n + 1
+		else:
+			self.rect = self.rect.move(0,-1)
+			self.n = self.n + 1
 	def gauche(self):
-		self.rect = self.rect.move(-2, 0)
-
+		if self.n % 500 == 0:
+			self.rect = self.rect.move(-5, 0)
+			self.n = self.n + 1
+		else:
+			self.rect = self.rect.move(-1,0)
+			self.n = self.n + 1
 	def droite(self):
-		self.rect = self.rect.move(2, 0)
+		if self.n % 500 == 0:
+			self.rect = self.rect.move(5, 0)
+			self.n = self.n + 1
+		else:
+			self.rect = self.rect.move(1,0)
+			self.n = self.n + 1
 	def stop(self):
 		self.rect = self.rect.move(0,0)
 
@@ -210,6 +228,7 @@ clock = pygame.time.Clock()
 pygame.display.flip()
 bot = TBBot()
 pab = LRBot()
+copybot = pygame.sprite.Group.copy
 follower = FolBot()
 balle = Pojectiles()
 ran = RBot()
@@ -225,8 +244,9 @@ pygame.display.flip
 continuer = 1
 continuer2 = 1
 continuer3 = 1
+x = 1
 musique_fond()
-try :
+if x == 1:
     while continuer :
 
         pygame.key.set_repeat(50,15)
@@ -254,7 +274,7 @@ try :
                 if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
                     follower.gauche()
                 else:
-                    follower.droite()
+                     follower.droite()
             elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
                 if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
                     follower.haut()
@@ -284,7 +304,7 @@ try :
                fenetre.blit(caisse, (x,y))
             vie_coeur(point_vie,fenetre)
 
-
+            fenetre.blit(copybot.image , copybot.rect)
             fenetre.blit( pab.image, pab.rect)
             fenetre.blit( bot.image, bot.rect)
             fenetre.blit( ran.image, ran.rect)
@@ -294,7 +314,7 @@ try :
             # Projectile
             if balle.alive :
                 fenetre.blit( balle.image, balle.rect)
-
+            copybot.update()
             pab.update()
             bot.update()
             ran.update()
@@ -372,10 +392,3 @@ try :
 
             pygame.display.flip()
             pygame.font.init()
-
-except :
-    traceback.print_exc()
-
-finally:
-    pygame.quit()
-    exit()
