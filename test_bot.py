@@ -96,7 +96,7 @@ class RBot(pygame.sprite.Sprite):
         self.image = pygame.image.load("Test_Matthieu/sprite.png")
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.rect = pygame.Rect(0,500,50,50)
+        self.rect = pygame.Rect(10,500,50,50)
         self.speed = [1, 0]
         self.update()
 
@@ -104,25 +104,32 @@ class RBot(pygame.sprite.Sprite):
     def update(self):
         if self.rect.left < 5:
             self.speed = [0, -1]
-        elif self.rect.right > 1110:
+        
+        if self.rect.right > 1110:
             self.speed = [0, 1]
-        if self.rect.top < 0:
+        
+        if self.rect.top < 10:
             self.speed = [1, 0]
-        elif self.rect.bottom > 670:
+        if self.rect.right > 900 and self.rect.top < 10:
+            self.speed = [0, 1]
+        if self.rect.bottom > 670:
             self.speed = [-1, 0]
+        if self.rect.left < 5 and self.rect.bottom > 670:
+            self.speed = [0,-1]
 
         for d in range (0,len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
-
-                if self.rect.top < rekt_boîte[d].bottom:
-                    self.speed = [1, 0]
-                if self.rect.bottom > rekt_boîte[d].top:
-                    self.speed = [-1, 0]
+                
                 if self.rect.left < rekt_boîte[d].right:
                     self.speed = [0, -1]
-                if self.rect.right > rekt_boîte[d].left:
+                elif self.rect.right > rekt_boîte[d].left:
                     self.speed = [0, 1]
-
+                elif self.rect.bottom > rekt_boîte[d].top:
+                    self.speed = [-1, 0]
+                
+                elif self.rect.top < rekt_boîte[d].bottom:
+                    self.speed = [1, 0]
+                
         self.rect = self.rect.move(self.speed)
 
 
