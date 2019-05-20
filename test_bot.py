@@ -30,11 +30,17 @@ table = liste[1]
 caisse = liste[2]
 caisses = liste[3]
 position_x_y = liste[4]
-epper_haut = pygame.image.load("partie_lilian\eper_haut.png").convert()
 
-epper_bas = pygame.image.load("partie_lilian\eper_bas.png").convert()
-epper_droite = pygame.image.load("partie_lilian\eper_droite.png").convert()
-epper_gauche = pygame.image.load("partie_lilian\eper_gauche.png")
+epper_ha = pygame.image.load("partie_lilian\eper_haut.png").convert()
+epper_ba = pygame.image.load("partie_lilian\eper_bas.png").convert()
+epper_dr = pygame.image.load("partie_lilian\eper_droite.png").convert()
+epper_ga = pygame.image.load("partie_lilian\eper_gauche.png").convert()
+
+epper_haut = apper_haut.get_rect()
+epper_bas = apper_ba.get_rect()
+epper_droite = epper_dr.get_rect()
+epper_gauche = epper_ga.get_rect()
+
 perso = pygame.image.load("perso.jpg").convert()
 position_perso = perso.get_rect()
 
