@@ -36,8 +36,8 @@ epper_ba = pygame.image.load("partie_lilian\eper_bas.png").convert()
 epper_dr = pygame.image.load("partie_lilian\eper_droite.png").convert()
 epper_ga = pygame.image.load("partie_lilian\eper_gauche.png").convert()
 
-epper_haut = apper_haut.get_rect()
-epper_bas = apper_ba.get_rect()
+epper_haut = epper_ha.get_rect()
+epper_bas = epper_ba.get_rect()
 epper_droite = epper_dr.get_rect()
 epper_gauche = epper_ga.get_rect()
 
@@ -328,22 +328,22 @@ while continuer :
                     pygame.display.flip()
 
                 if event.key == K_UP:
-                    fenetre.blit(epper_haut,((position_perso[0]+5),(position_perso[1]-65)))
+                    fenetre.blit(epper_ha,((position_perso[0]+5),(position_perso[1]-65)))
                     pygame.display.flip()
                     pygame.display.flip()
 
                 if event.key == K_DOWN:
-                    fenetre.blit(epper_bas,((position_perso[0]+5),(position_perso[1]+50)))
+                    fenetre.blit(epper_ba,((position_perso[0]+5),(position_perso[1]+50)))
                     pygame.display.flip()
                     pygame.display.flip()
 
                 if event.key == K_RIGHT:
-                    fenetre.blit(epper_droite,((position_perso[0]+50),(position_perso[1]+5)))
+                    fenetre.blit(epper_dr,((position_perso[0]+50),(position_perso[1]+5)))
                     pygame.display.flip()
                     pygame.display.flip()
 
                 if event.key == K_LEFT:
-                    fenetre.blit(epper_gauche,((position_perso[0]-65),(position_perso[1]+5)))
+                    fenetre.blit(epper_ga,((position_perso[0]-65),(position_perso[1]+5)))
                     pygame.display.flip()
                     pygame.display.flip()
 
