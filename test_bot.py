@@ -102,41 +102,34 @@ class CBot(pygame.sprite.Sprite):
         self.image = pygame.image.load("Test_Matthieu/sprite.png")
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.rect = pygame.Rect(10,500,50,50)
+
         self.speed = [1, 0]
+        self.limite1 = randrange(5,501)
+        self.limite2 = randrange(500,1001)
+        self.limite3 = randrange(10,315)
+        self.limite4 = randrange(315,631)
+        self.rect = pygame.Rect(self.limite1,self.limite3,50,50)
         self.update()
 
 
+
     def update(self):
-        if self.rect.left < 5:
+        if self.rect.left < self.limite1:
             self.speed = [0, -1]
         
-        if self.rect.right > 1110:
+        if self.rect.right > self.limite2:
             self.speed = [0, 1]
         
-        if self.rect.top < 10:
+        if self.rect.top < self.limite3:
             self.speed = [1, 0]
-        if self.rect.right > 900 and self.rect.top < 10:
+        if self.rect.right > self.limite2 and self.rect.top < self.limite3:
             self.speed = [0, 1]
-        if self.rect.bottom > 670:
+        if self.rect.bottom > self.limite4:
             self.speed = [-1, 0]
-        if self.rect.left < 5 and self.rect.bottom > 670:
+        if self.rect.left < self.limite1 and self.rect.bottom > self.limite4:
             self.speed = [0,-1]
 
-        for d in range (0,len(rekt_boîte)):
-            if self.rect.colliderect(rekt_boîte[d]):
-                
-                if self.rect.right > rekt_boîte[d].left:
-                    self.speed = [0, 1]
-                
-                elif self.rect.left < rekt_boîte[d].right:
-                    self.speed = [0, -1]
-                
-                
-                elif self.rect.top < rekt_boîte[d].bottom:
-                    self.speed = [1, 0]
-                elif self.rect.bottom > rekt_boîte[d].top:
-                    self.speed = [-1, 0]
+        
         self.rect = self.rect.move(self.speed)
 
 class ABot(pygame.sprite.Sprite):
