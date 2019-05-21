@@ -126,12 +126,15 @@ class RBot(pygame.sprite.Sprite):
         for d in range (0,len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
                 
-                if self.rect.left < rekt_boîte[d].right:
-                    self.speed = [0, -1]
-                elif self.rect.right > rekt_boîte[d].left:
+                
+                
+                if self.rect.right > rekt_boîte[d].left:
                     self.speed = [0, 1]
                 elif self.rect.bottom > rekt_boîte[d].top:
                     self.speed = [-1, 0]
+                elif self.rect.left < rekt_boîte[d].right:
+                    self.speed = [0, -1]
+                
                 
                 elif self.rect.top < rekt_boîte[d].bottom:
                     self.speed = [1, 0]
