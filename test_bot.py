@@ -95,7 +95,7 @@ class LRBot(pygame.sprite.Sprite):
 
 		#print(self.speed)
 
-class RBot(pygame.sprite.Sprite):
+class CBot(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -126,22 +126,31 @@ class RBot(pygame.sprite.Sprite):
         for d in range (0,len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
                 
-                
-                
                 if self.rect.right > rekt_boîte[d].left:
                     self.speed = [0, 1]
-                elif self.rect.bottom > rekt_boîte[d].top:
-                    self.speed = [-1, 0]
+                
                 elif self.rect.left < rekt_boîte[d].right:
                     self.speed = [0, -1]
                 
                 
                 elif self.rect.top < rekt_boîte[d].bottom:
                     self.speed = [1, 0]
-                
+                elif self.rect.bottom > rekt_boîte[d].top:
+                    self.speed = [-1, 0]
         self.rect = self.rect.move(self.speed)
 
+class ABot(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("Test_Matthieu/sprite5.png")
+        self.rect = pygame.Rect(200,200,50,50)
+    
+    def update(self):
+        self.rand1 = randrange(-3, 4)
+        self.rand2 = randrange(-3, 4)
 
+        self.speed = [self.rand1, self.rand2]
+        self.rect = self.rect.move(self.speed)
 
 class FolBot(pygame.sprite.Sprite):
 
@@ -202,8 +211,8 @@ bot = TBBot()
 pab = LRBot()
 pab2 = LRBot()
 follower = FolBot()
-ran = RBot()
-
+ran = CBot()
+ale = ABot()
 
 bots.add(bot)
 bots.add(pab)
@@ -281,9 +290,11 @@ while continuer :
         fenetre.blit( pab2.image, pab2.rect)
         fenetre.blit( bot.image, bot.rect)
         fenetre.blit( ran.image, ran.rect)
+        fenetre.blit( ale.image, ale.rect)
         fenetre.blit(perso,position_perso)
         fenetre.blit(aff_crono,(500,5))
         fenetre.blit( follower.image, follower.rect)
+       
 
 
 
@@ -291,6 +302,7 @@ while continuer :
         pab2.update()
         bot.update()
         ran.update()
+        ale.update()
 
         follower.update()
         pygame.display.flip()
