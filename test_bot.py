@@ -139,8 +139,10 @@ class ABot(pygame.sprite.Sprite):
     def update(self):
         self.rand1 = randrange(-3, 4)
         self.rand2 = randrange(-3, 4)
-
-        self.speed = [self.rand1, self.rand2]
+        if self.rect.left < 5 or self.rect.right > 1100 or self.rect.top < 5 or self.rect.bottom > 640:
+            self.speed = [0,0]
+        else:
+            self.speed = [self.rand1, self.rand2]
         self.rect = self.rect.move(self.speed)
 
 class FolBot(pygame.sprite.Sprite):
