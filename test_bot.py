@@ -11,6 +11,7 @@ from Partie_Clément.musique import musique_blesse
 from Partie_Clément.musique import musique_tir
 from Partie_Clément.musique import musique_fin
 from Partie_Clément.musique import musique_fond
+from Partie_Clément.musique import musique_tuer_bot
 
 
 pygame.init()
@@ -127,7 +128,7 @@ class CBot(pygame.sprite.Sprite):
         if self.rect.left < self.limite1 and self.rect.bottom > self.limite4:
             self.speed = [0,-1]
 
-        
+
         self.rect = self.rect.move(self.speed)
 
 class ABot(pygame.sprite.Sprite):
@@ -139,8 +140,8 @@ class ABot(pygame.sprite.Sprite):
     def update(self):
         self.rand1 = randrange(-3, 4)
         self.rand2 = randrange(-3, 4)
-        if self.rect.left < 5 or self.rect.right > 1100 or self.rect.top < 5 or self.rect.bottom > 640:
-            self.speed = [0,0]
+        if self.rect.left < 5 or self.rect.right > 1130 or self.rect.top < 5 or self.rect.bottom > 640:
+            self.rect = pygame.Rect(550,330,50,50)
         else:
             self.speed = [self.rand1, self.rand2]
         self.rect = self.rect.move(self.speed)
@@ -387,7 +388,38 @@ while continuer :
         if epper_haut.colliderect(follower.rect) or epper_bas.colliderect(follower.rect) or epper_droite.colliderect(follower.rect) or epper_gauche.colliderect(follower.rect) :
             rand = randrange(1,17)
             follower.rect= pygame.Rect(bot_x_y[rand])
+            musique_tuer_bot()
 
+        if conteur == 10:
+            pab.speed = [2,0]
+
+        if conteur == 20:
+            pab2.speed =[2,0]
+
+        if conteur == 30:
+            speed = 7
+
+        if conteur == 40:
+            ran.speed = [2,0]
+
+        if conteur == 50:
+            ale.rand1 = randrange(-5,6)
+            ale.rand2 = randrange(-5,6)
+
+        if conteur == 60:
+            speed =6
+
+        if conteur == 70:
+            speed =5
+
+        if conteur == 100:
+            pab.speed =[4,0]
+            pab2.speed =[4,0]
+            ale.rand1 = randrange(-10,10)
+            ale.rand2 = randrange(-10,10)
+            ran.speed = [4,0]
+            speed = 4
+            point_vie = 1
 
         if point_vie == 0 :
             continuer2 = 0
