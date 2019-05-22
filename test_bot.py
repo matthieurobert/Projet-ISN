@@ -110,10 +110,10 @@ class CBot(pygame.sprite.Sprite):
     def update(self):
         if self.rect.left < 5:
             self.speed = [0, -1]
-        
+
         if self.rect.right > 1110:
             self.speed = [0, 1]
-        
+
         if self.rect.top < 10:
             self.speed = [1, 0]
         if self.rect.right > 900 and self.rect.top < 10:
@@ -125,14 +125,14 @@ class CBot(pygame.sprite.Sprite):
 
         for d in range (0,len(rekt_boîte)):
             if self.rect.colliderect(rekt_boîte[d]):
-                
+
                 if self.rect.right > rekt_boîte[d].left:
                     self.speed = [0, 1]
-                
+
                 elif self.rect.left < rekt_boîte[d].right:
                     self.speed = [0, -1]
-                
-                
+
+
                 elif self.rect.top < rekt_boîte[d].bottom:
                     self.speed = [1, 0]
                 elif self.rect.bottom > rekt_boîte[d].top:
@@ -144,7 +144,7 @@ class ABot(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Test_Matthieu/sprite5.png")
         self.rect = pygame.Rect(200,200,50,50)
-    
+
     def update(self):
         self.rand1 = randrange(-3, 4)
         self.rand2 = randrange(-3, 4)
@@ -260,17 +260,23 @@ while continuer :
             else:
                 follower.bas()
 
-        if pab.rect.colliderect(position_perso) or pab2.rect.colliderect(position_perso) :
+        if pab.rect.colliderect(position_perso) or pab2.rect.colliderect(position_perso) or bot.rect.colliderect(position_perso) or ran.rect.colliderect(position_perso) or ale.rect.colliderect(position_perso) :
             point_vie = point_vie - 1
             if point_vie != 0:
                 musique_blesse()
-            rand = randrange(1,17)
+            rand = randrange(1,14)
             follower.rect= pygame.Rect(bot_x_y[rand])
             pab.rect= pygame.Rect(bot_x_y[rand+1])
             pab2.rect= pygame.Rect(bot_x_y[rand+2])
+            bot.rect = pygame.Rect(bot_x_y[rand+3])
+            ran.rect = pygame.Rect(bot_x_y[rand+4])
+            ale.rect = pygame.Rect(bot_x_y[rand+5])
             fenetre.blit( follower.image,follower.rect)
             fenetre.blit( pab.image, pab.rect)
             fenetre.blit( pab2.image, pab2.rect)
+            fenetre.blit( bot.image, bot.rect)
+            fenetre.blit( ran.image, ran.rect)
+            fenetre.blit( ale.image, ale.rect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -294,7 +300,7 @@ while continuer :
         fenetre.blit(perso,position_perso)
         fenetre.blit(aff_crono,(500,5))
         fenetre.blit( follower.image, follower.rect)
-       
+
 
 
 
@@ -344,22 +350,35 @@ while continuer :
 
                 if event.key == K_UP:
                     fenetre.blit(epper_ha,((position_perso[0]+5),(position_perso[1]-65)))
+                    epper_haut = pygame.Rect((position_perso[0]+5),(position_perso[1]-65),40,65)
                     pygame.display.flip()
+
+                else :
+                    epper_haut=pygame.Rect(0,0,0,0)
                     pygame.display.flip()
 
                 if event.key == K_DOWN:
                     fenetre.blit(epper_ba,((position_perso[0]+5),(position_perso[1]+50)))
+                    epper_bas = pygame.Rect((position_perso[0]+5),(position_perso[1]+50),40,65)
                     pygame.display.flip()
+                else :
+                    epper_bas=pygame.Rect(0,0,0,0)
                     pygame.display.flip()
 
                 if event.key == K_RIGHT:
                     fenetre.blit(epper_dr,((position_perso[0]+50),(position_perso[1]+5)))
+                    epper_droite = pygame.Rect((position_perso[0]+50),(position_perso[1]+5),65,40)
                     pygame.display.flip()
+                else :
+                    epper_droite=pygame.Rect(0,0,0,0)
                     pygame.display.flip()
 
                 if event.key == K_LEFT:
                     fenetre.blit(epper_ga,((position_perso[0]-65),(position_perso[1]+5)))
+                    epper_gauche = pygame.Rect((position_perso[0]-65),(position_perso[1]+5),65,40)
                     pygame.display.flip()
+                else :
+                    epper_gauche=pygame.Rect(0,0,0,0)
                     pygame.display.flip()
 
                 if event.key == K_v :
@@ -371,6 +390,12 @@ while continuer :
                     fenetre.blit( follower.image,follower.rect)
                     fenetre.blit( pab.image, pab.rect)
                     pygame.display.flip()
+
+        if epper_haut.colliderect(follower.rect) or epper_bas.colliderect(follower.rect) or epper_droite.colliderect(follower.rect) or epper_gauche.colliderect(follower.rect) :
+            rand = randrange(1,17)
+            follower.rect= pygame.Rect(bot_x_y[rand])
+
+
         if point_vie == 0 :
             continuer2 = 0
             continuer3 = 1

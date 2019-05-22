@@ -12,7 +12,7 @@ def variable():
    arial_font = pygame.font.SysFont("arial",30)
    point_vie = 3
    speed =8
-   repouser = speed 
+   repouser = speed
    aff_crono = arial_font.render("Score : "+chiffre, True, black)
    ips = 60
    hauteur_x = 1100
