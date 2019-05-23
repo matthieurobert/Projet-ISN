@@ -4,7 +4,7 @@ import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from Partie_Clément.liste_x_y_bot import liste
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom,save_score,lire_base_donner
 from partie_lilian.variable import variable
 from random import randrange
 from Partie_Clément.musique import musique_blesse
@@ -329,14 +329,11 @@ while continuer :
                     epper_haut = pygame.Rect((position_perso[0]+5),(position_perso[1]-65),40,65)
                     pygame.display.flip()
 
-<<<<<<< HEAD
-        pygame.key.set_repeat(100,15)
-        while continuer2:
-=======
+
                 else :
                     epper_haut=pygame.Rect(0,0,0,0)
                     pygame.display.flip()
->>>>>>> bb17763502c9e35e02dbe88e0aa146dd2bca5569
+
 
                 if event.key == K_DOWN:
                     fenetre.blit(epper_ba,((position_perso[0]+5),(position_perso[1]+50)))
@@ -412,8 +409,9 @@ while continuer :
             continuer2 = 0
             continuer3 = 1
 
-
-    game_over(conteur,fenetre,nom_joueur)
+    save_score(conteur,nom_joueur)
+    mielleur_score = lire_base_donner()
+    game_over(conteur,fenetre,nom_joueur,mielleur_score)
     musique_fin()
     while continuer3:
         for event in pygame.event.get():
@@ -435,143 +433,3 @@ while continuer :
         pygame.display.flip()
         pygame.font.init()
 
-<<<<<<< HEAD
-                if event.type == QUIT:
-                    continuer = 1
-                    pygame.quit()
-
-                if  event.type == KEYDOWN :
-
-
-                    if event.key == K_a:
-                        position_perso=gauche(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso, position_perso)      #gauche
-                        pygame.display.flip()
-                    if event.key == K_d:
-                        position_perso=droite(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso, position_perso)        #droite
-                        pygame.display.flip()
-
-                    if event.key == K_w:
-                        position_perso=monter(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso, position_perso)
-                        pygame.display.flip()                       #monter
-
-                    if event.key == K_s:
-                        position_perso=decendre(position_perso,speed,rekt_boîte,repouser,fenetre,ips,clock,perso,murs_colision)
-                        fenetre.blit(perso,position_perso)           #decendre
-                        pygame.display.flip()
-
-                        pygame.display.flip()
-
-                    if event.key == K_UP:
-                        fenetre.blit(epper_ha,((position_perso[0]+5),(position_perso[1]-65)))
-                        epper_haut = pygame.Rect((position_perso[0]+5),(position_perso[1]-65),40,65)
-                        pygame.display.flip()
-
-                    else :
-                        epper_haut=pygame.Rect(0,0,0,0)
-                        pygame.display.flip()
-
-                    if event.key == K_DOWN:
-                        fenetre.blit(epper_ba,((position_perso[0]+5),(position_perso[1]+50)))
-                        epper_bas = pygame.Rect((position_perso[0]+5),(position_perso[1]+50),40,65)
-                        pygame.display.flip()
-                    else :
-                        epper_bas=pygame.Rect(0,0,0,0)
-                        pygame.display.flip()
-
-                    if event.key == K_RIGHT:
-                        fenetre.blit(epper_dr,((position_perso[0]+50),(position_perso[1]+5)))
-                        epper_droite = pygame.Rect((position_perso[0]+50),(position_perso[1]+5),65,40)
-                        pygame.display.flip()
-                    else :
-                        epper_droite=pygame.Rect(0,0,0,0)
-                        pygame.display.flip()
-
-                    if event.key == K_LEFT:
-                        fenetre.blit(epper_ga,((position_perso[0]-65),(position_perso[1]+5)))
-                        epper_gauche = pygame.Rect((position_perso[0]-65),(position_perso[1]+5),65,40)
-                        pygame.display.flip()
-                    else :
-                        epper_gauche=pygame.Rect(0,0,0,0)
-                        pygame.display.flip()
-
-                    if event.key == K_v :
-                        point_vie = point_vie - 1
-                        musique_blesse()
-                        r = randrange(1,18)
-                        follower.rect= pygame.Rect(bot_x_y[r])
-                        pab.rect= pygame.Rect(bot_x_y[r+1])
-                        fenetre.blit( follower.image,follower.rect)
-                        fenetre.blit( pab.image, pab.rect)
-                        pygame.display.flip()
-
-            if epper_haut.colliderect(follower.rect) or epper_bas.colliderect(follower.rect) or epper_droite.colliderect(follower.rect) or epper_gauche.colliderect(follower.rect) :
-                rand = randrange(1,17)
-                follower.rect= pygame.Rect(bot_x_y[rand])
-                musique_tuer_bot()
-
-            if conteur == 10:
-                pab.speed = [2,0]
-
-            if conteur == 20:
-                pab2.speed =[2,0]
-
-            if conteur == 30:
-                speed = 7
-
-            if conteur == 40:
-                ran.speed = [2,0]
-
-            if conteur == 50:
-                ale.rand1 = randrange(-5,6)
-                ale.rand2 = randrange(-5,6)
-
-            if conteur == 60:
-                speed =6
-
-            if conteur == 70:
-                speed =5
-
-            if conteur == 100:
-                pab.speed =[4,0]
-                pab2.speed =[4,0]
-                ale.rand1 = randrange(-10,10)
-                ale.rand2 = randrange(-10,10)
-                ran.speed = [4,0]
-                speed = 4
-                point_vie = 1
-
-            if point_vie <= 0 :
-                continuer2 = 0
-                continuer3 = 1
-            
-        save_score(conteur,nom_joueur)
-        premier_score=lire_base_donner()  
-        game_over(conteur,fenetre,nom_joueur,premier_score)
-        musique_fin()
-        
-        while continuer3:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-
-                    continuer3 = 0
-                    pygame.display.quit()
-                if event.type == KEYDOWN:
-                    if event.key == K_r:
-                        point_vie = 3
-                        continuer2 = 1
-                        continuer3=0
-                        fenetre.blit(perso,(0,0))
-                        pygame.display.flip()
-                        musique_fond()
-
-
-
-            pygame.display.flip()
-            pygame.font.init()
-    
-fonction_principal()
-=======
->>>>>>> bb17763502c9e35e02dbe88e0aa146dd2bca5569

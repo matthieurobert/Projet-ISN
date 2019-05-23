@@ -36,4 +36,4 @@ def lire_base_donner():
         premier_score = liste_classer[(len(liste_classer)-1)]
         print(premier_score)
 
-afficher_text()
+lire_base_donner()

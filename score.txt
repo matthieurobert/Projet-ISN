@@ -6,28 +6,5 @@
  i�rtfi 20  
  lilian  17
 jeami  102 
-lol 103
-sqf* 2
-qdf 1
-qf 1
-qf 3
-qdq 2
-sdqf 2
-qdf 1
-qfd 1
-qf 1
-qsf 2
-qdf 1
-qfd 1
-qf 2
-qfdq 1
-qdfq 1
-qdf 1
-qdf 1
-qsdf 1
-<<<<<<< HEAD
-olkguy 23
-gj 3
-=======
-
->>>>>>> bb17763502c9e35e02dbe88e0aa146dd2bca5569
+QF 1
+qsdq 1

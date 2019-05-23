@@ -63,16 +63,19 @@ def murs_colision(speed,position_perso) :
         position_perso = position_perso.move(0,-speed)
     return position_perso
 
-def game_over(conteur,fenetre,nom_joueur) :
+def game_over(conteur,fenetre,nom_joueur,mielleur_score) :
     blanc= (255,255,255)
     score_finale=str(conteur)
     nom_joueur=str(nom_joueur)
+    Verdana_Pro_Black = pygame.font.SysFont('pygame.font.SysFont',25)
     arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
+    aff_WR = Verdana_Pro_Black.render("WR : "+mielleur_score[1]+" par "+mielleur_score[0],True,blanc)
     aff_nom = arial.render(nom_joueur, True, blanc)
     aff_score_final = arial.render("Score : "+score_finale, True, blanc)
     affi_gam_over = pygame.image.load("partie_lilian\gameover-py-blast.jpg").convert_alpha()
     fenetre.blit(affi_gam_over,(0,0))
     fenetre.blit(aff_nom,(480,325))
+    fenetre.blit(aff_WR,(900,20))
     fenetre.blit(aff_score_final,(450,375))
 
 
@@ -141,14 +144,46 @@ def chrono(depart,black):
     liste_crono=[aff_crono,conteur]
     return (liste_crono)
 
-def génératrice_nom():
-    nombre= randrange(0,26)
-    lettre = ["a","b","e","r","t","y","u","i","o","p","q","s","d","f","g","h","j","k","l","m","w","x","c","v","b","n"]
-    nombre2= randrange(0,9)
-    mots=[]
-    for i in range (0,nombre2):
-        mots.append(lettre[nombre])
-        nombre= randrange(0,26)
-    s=''
-    mots_aleatoire = s.join(mots)
-    return (mots_aleatoire)
+
+def lire_base_donner():
+
+        import pickle
+      
+        score_trier = []
+        liste_classer = []
+        liste_final = []
+        score_pseudo = []
+        
+        
+        with open('score.txt','r') as text_perso:
+                info_perso = text_perso.read()
+                liste_depart = info_perso.split()
+                
+        for i in range (0,(len(liste_depart)),2) :
+                        
+                if i<((len(liste_depart))-1):
+                        score_pseudo= [liste_depart[i],liste_depart[i+1]]
+                score_trier.append(score_pseudo)
+        liste_classer.append(score_trier[0])        
+        for j in range (1,(len(score_trier)),1):
+                dernier_liste_sclasser = int(len(liste_classer)-1)
+                chiffre_comparais = int(score_trier[j][1])
+                plus_grand_liste_classer = int(liste_classer[dernier_liste_sclasser][1])
+                if (chiffre_comparais > plus_grand_liste_classer) :
+                        liste_classer.append(score_trier[j])
+        premier_score = liste_classer[(len(liste_classer)-1)]
+        return(premier_score)
+
+def save_score(conteur,nom_joueur):
+    import pickle
+  
+    score_fait = str(conteur)
+
+    with open('score.txt','a') as score:
+
+        score.write(nom_joueur) 
+        score.write(' ')
+        score.write(score_fait)
+        score.write('\n')
+    
+    score.close()
