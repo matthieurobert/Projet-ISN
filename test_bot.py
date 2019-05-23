@@ -1,10 +1,11 @@
+
 import pygame
 import sys
 import time
 from pygame.locals import *
 from Partie_Clément.rekt_boîte import rekt
 from Partie_Clément.liste_x_y_bot import liste
-from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom
+from partie_lilian.fonction import murs_colision,game_over,vie_coeur,chrono,gauche,droite,monter,decendre,demande_de_nom,save_score,lire_base_donner
 from partie_lilian.variable import variable
 from random import randrange
 from Partie_Clément.musique import musique_blesse
@@ -387,13 +388,15 @@ while continuer :
             follower.rect= pygame.Rect(bot_x_y[rand])
 
 
-        if point_vie == 0 :
+        if point_vie <= 0 :
             continuer2 = 0
             continuer3 = 1
-
-
-    game_over(conteur,fenetre,nom_joueur)
+        
+    save_score(conteur,nom_joueur)
+    premier_score=lire_base_donner()  
+    game_over(conteur,fenetre,nom_joueur,premier_score)
     musique_fin()
+    
     while continuer3:
         for event in pygame.event.get():
             if event.type == QUIT:
