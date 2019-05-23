@@ -1,4 +1,6 @@
+
 def lire_base_donner():
+
         import pickle
         from nom_score import nom
         from nom_score import nombre
@@ -34,3 +36,4 @@ def lire_base_donner():
         premier_score = liste_classer[(len(liste_classer)-1)]
         print(premier_score)
 
+afficher_text()
