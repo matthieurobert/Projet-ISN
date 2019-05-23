@@ -67,15 +67,15 @@ def game_over(conteur,fenetre,nom_joueur,mielleur_score) :
     blanc= (255,255,255)
     score_finale=str(conteur)
     nom_joueur=str(nom_joueur)
-    Verdana_Pro_Black = pygame.font.SysFont('pygame.font.SysFont',25)
+    Arial_Black = pygame.font.SysFont('Arial Black',24)
     arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
-    aff_WR = Verdana_Pro_Black.render("WR : "+mielleur_score[1]+" par "+mielleur_score[0],True,blanc)
+    aff_WR = Arial_Black.render("WR : "+mielleur_score[1]+" par "+mielleur_score[0],True,blanc)
     aff_nom = arial.render(nom_joueur, True, blanc)
     aff_score_final = arial.render("Score : "+score_finale, True, blanc)
     affi_gam_over = pygame.image.load("partie_lilian\gameover-py-blast.jpg").convert_alpha()
     fenetre.blit(affi_gam_over,(0,0))
     fenetre.blit(aff_nom,(480,325))
-    fenetre.blit(aff_WR,(900,20))
+    fenetre.blit(aff_WR,(850,20))
     fenetre.blit(aff_score_final,(450,375))
 
 
