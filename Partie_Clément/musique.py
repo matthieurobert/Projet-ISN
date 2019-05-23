@@ -16,6 +16,13 @@ def musique_tir():
     loops = 0
     tir.play(loops, maxtime=0,fade_ms=0)
 
+def musique_tuer_bot():
+
+
+    tuer_bot = pygame.mixer.Sound(r"Partie_Clément/musique_fond/tuer_bot.wav")
+    loops = 0
+    tuer_bot.play(loops, maxtime=0,fade_ms=0)
+
 def musique_fin():
 
     pygame.mixer.stop()
