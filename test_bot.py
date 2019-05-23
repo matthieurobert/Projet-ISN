@@ -71,8 +71,6 @@ class LRBot(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Test_Matthieu/sprite2.png")
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
         rand = randrange(1,18)
         coor=bot_x_y[rand+1]
         self.rect = pygame.Rect(coor[0],coor[1],coor[2],coor[3])
@@ -91,16 +89,11 @@ class LRBot(pygame.sprite.Sprite):
 
         self.rect = self.rect.move(self.speed)
 
-
-		#print(self.speed)
-
 class CBot(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Test_Matthieu/sprite.png")
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
         self.speed = [1, 0]
         self.limite1 = randrange(5,501)
         self.limite2 = randrange(500,1001)
@@ -151,19 +144,10 @@ class FolBot(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Test_Matthieu/sprite4.png")
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
         self.rect = pygame.Rect(400,200,50,50)
-		#self.side = side
-		#self.speed = 10
-        self.state = "still"
-
-
-
 
     def bas(self):
         self.rect = self.rect.move(0, 1)
-
 
     def haut(self):
         self.rect = self.rect.move(0, -1)

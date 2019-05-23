@@ -51,54 +51,30 @@ def demande_de_nom():
     return(nom_joueur)
 
 def murs_colision(speed,position_perso) :
-    hauteur_x = 1092
-    hauteur_y= 655
-    if position_perso[0]<1:
+    hauteur_x = 1100
+    hauteur_y= 675
+    if position_perso[0]<0:
         position_perso = position_perso.move(speed,0)
     if position_perso[0]>hauteur_x:
         position_perso = position_perso.move(-speed,0)
-    if position_perso[1]<12:
+    if position_perso[1]<0:
         position_perso = position_perso.move(0,speed)
     if position_perso[1]>hauteur_y:
         position_perso = position_perso.move(0,-speed)
     return position_perso
 
-def game_over(conteur,fenetre,nom_joueur,premier_score) :
+def game_over(conteur,fenetre,nom_joueur) :
     blanc= (255,255,255)
-    black = (0,0,0)
     score_finale=str(conteur)
     nom_joueur=str(nom_joueur)
-    Impact = pygame.font.SysFont('Impact',100)
-    Arial_Black = pygame.font.SysFont('Arial Black',20)
     arial = pygame.font.SysFont('Comic Sans MS,Arial', 45)
-    aff_word_record = Arial_Black.render("WR"+" : "+premier_score[1]+" par "+premier_score[0], True, blanc)
-    aff_rejouer = Impact.render("Rejouer",True,black)
     aff_nom = arial.render(nom_joueur, True, blanc)
     aff_score_final = arial.render("Score : "+score_finale, True, blanc)
     affi_gam_over = pygame.image.load("partie_lilian\gameover-py-blast.jpg").convert_alpha()
-    
     fenetre.blit(affi_gam_over,(0,0))
     fenetre.blit(aff_nom,(480,325))
-    fenetre.blit(aff_rejouer,(375,450))
     fenetre.blit(aff_score_final,(450,375))
-    fenetre.blit(aff_word_record,(900,30))
-    pygame.init()
-    continuer = 1
-    while continuer:
-        fenetre = pygame.display.set_mode((1145,720))
-        
-        fenetre.blit(affi_gam_over,(0,0))
-        fenetre.blit(aff_nom,(480,325))
-        fenetre.blit(aff_rejouer,(375,450))
-        fenetre.blit(aff_score_final,(450,375))
-        fenetre.blit(aff_word_record,(900,30))
-        variable_rejouer = 0 
-        pygame.display.flip()
-        for event in pygame.event.get():
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1 and 300 <= event.pos[0] <= 800 and 330 <= event.pos[1] <= 450:
-                    variable_rejouer = 1
-                    continuer = 0
+
 
 def vie_coeur(point_vie,fenetre) :
     image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
@@ -165,45 +141,14 @@ def chrono(depart,black):
     liste_crono=[aff_crono,conteur]
     return (liste_crono)
 
-
-def lire_base_donner():
-        import pickle
-       
-        score_trier = []
-        liste_classer = []
-        liste_final = []
-        score_pseudo = []
-        liste_second = []
-        a = 0
-        with open('score.txt','r') as text_perso:
-                info_perso = text_perso.read()
-                liste_depart = info_perso.split()
-                
-        for i in range (0,(len(liste_depart)),2) :
-                        
-                if i<((len(liste_depart))-1):
-                        score_pseudo= [liste_depart[i],liste_depart[i+1]]
-                       
-                score_trier.append(score_pseudo)
-        liste_classer.append(score_trier[0])
-       
-        for j in range (1,(len(score_trier)),1):
-                dernier_liste_sclasser = int(len(liste_classer)-1)
-                chiffre_comparais = int(score_trier[j][1])
-                plus_grand_liste_classer = int(liste_classer[dernier_liste_sclasser][1])
-                if (chiffre_comparais > plus_grand_liste_classer) :
-                        liste_classer.append(score_trier[j])
-        premier_score = liste_classer[(len(liste_classer)-1)]
-        return(premier_score)
-def save_score(conteur,nom_joueur):
-    import pickle
-    
-    with open('score.txt','a') as score:
-        score_finale=str(conteur)
-        score.write(nom_joueur) 
-        score.write(' ')
-        score.write(score_finale)
-        score.write('\n')
-    
-    score.close()
-
+def génératrice_nom():
+    nombre= randrange(0,26)
+    lettre = ["a","b","e","r","t","y","u","i","o","p","q","s","d","f","g","h","j","k","l","m","w","x","c","v","b","n"]
+    nombre2= randrange(0,9)
+    mots=[]
+    for i in range (0,nombre2):
+        mots.append(lettre[nombre])
+        nombre= randrange(0,26)
+    s=''
+    mots_aleatoire = s.join(mots)
+    return (mots_aleatoire)
