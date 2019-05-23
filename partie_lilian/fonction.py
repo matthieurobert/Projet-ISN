@@ -84,6 +84,7 @@ def game_over(conteur,fenetre,nom_joueur,premier_score) :
     fenetre.blit(aff_word_record,(900,30))
     pygame.init()
     continuer = 1
+    variable_rejouer = 0 
     while continuer:
         fenetre = pygame.display.set_mode((1145,720))
         
@@ -92,14 +93,14 @@ def game_over(conteur,fenetre,nom_joueur,premier_score) :
         fenetre.blit(aff_rejouer,(375,450))
         fenetre.blit(aff_score_final,(450,375))
         fenetre.blit(aff_word_record,(900,30))
-        variable_rejouer = 0 
+        
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1 and 300 <= event.pos[0] <= 800 and 330 <= event.pos[1] <= 450:
+                if event.button == 1 and 375 <= event.pos[0] <= 800 and 450 <= event.pos[1] <= 575:
                     variable_rejouer = 1
                     continuer = 0
-
+    return(variable_rejouer)
 def vie_coeur(point_vie,fenetre) :
     image_coeur1 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
     image_coeur2 = pygame.image.load("partie_lilian\sprite_coeur_moyene.png").convert_alpha()
