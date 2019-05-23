@@ -96,6 +96,11 @@ def game_over(conteur,fenetre,nom_joueur,premier_score) :
         
         pygame.display.flip()
         for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_n:
+                  
+                    variable_rejouer = 1
+                    continuer = 0
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1 and 375 <= event.pos[0] <= 800 and 450 <= event.pos[1] <= 575:
                     variable_rejouer = 1
