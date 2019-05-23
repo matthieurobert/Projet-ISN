@@ -231,53 +231,53 @@ def fonction_principal():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         pygame.quit()
-                if follower.rect.colliderect(position_perso):
-                    follower.stop()
-                    point_vie = point_vie - 1
-                    if point_vie != 0:
-                        musique_blesse()
-                    rand = randrange(1,18)
-                    follower.rect= pygame.Rect(bot_x_y[rand])
-                    pab.rect= pygame.Rect(bot_x_y[rand+1])
-                    fenetre.blit( follower.image,follower.rect)
-                    fenetre.blit( pab.image, pab.rect)
-                elif abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
-                    if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
-                        follower.gauche()
-                    else:
+            if follower.rect.colliderect(position_perso):
+                follower.stop()
+                point_vie = point_vie - 1
+                if point_vie != 0:
+                    musique_blesse()
+                rand = randrange(1,18)
+                follower.rect= pygame.Rect(bot_x_y[rand])
+                pab.rect= pygame.Rect(bot_x_y[rand+1])
+                fenetre.blit( follower.image,follower.rect)
+                fenetre.blit( pab.image, pab.rect)
+            elif abs(position_perso[0] - follower.rect[0]) == abs(position_perso[1] - follower.rect[1]):
+                if abs(position_perso[0] - follower.rect[0]) != position_perso[0] - follower.rect[0]:
+                    follower.gauche()
+                else:
                         follower.droite()
-                elif abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
-                    if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
-                        follower.gauche()
-                    else:
-                        follower.droite()
-                elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
-                    if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
-                        follower.haut()
-                    else:
-                        follower.bas()
+            elif abs(position_perso[0] - follower.rect[0]) > abs(position_perso[1] - follower.rect[1]):
+                if abs(position_perso[0]-follower.rect[0]) != position_perso[0] - follower.rect[0]:
+                    follower.gauche()
+                else:
+                    follower.droite()
+            elif abs(position_perso[0] - follower.rect[0]) < abs(position_perso[1] - follower.rect[1]):
+                if abs(position_perso[1]-follower.rect[1]) != position_perso[1] - follower.rect[1]:
+                    follower.haut()
+                else:
+                    follower.bas()
 
-                if pab.rect.colliderect(position_perso) or pab2.rect.colliderect(position_perso) or bot.rect.colliderect(position_perso) or ran.rect.colliderect(position_perso) or ale.rect.colliderect(position_perso) :
-                    point_vie = point_vie - 1
-                    if point_vie != 0:
-                        musique_blesse()
-                    rand = randrange(1,14)
-                    follower.rect= pygame.Rect(bot_x_y[rand])
-                    pab.rect= pygame.Rect(bot_x_y[rand+1])
-                    pab2.rect= pygame.Rect(bot_x_y[rand+2])
-                    bot.rect = pygame.Rect(bot_x_y[rand+3])
-                    ran.rect = pygame.Rect(bot_x_y[rand+4])
-                    ale.rect = pygame.Rect(bot_x_y[rand+5])
-                    fenetre.blit( follower.image,follower.rect)
-                    fenetre.blit( pab.image, pab.rect)
-                    fenetre.blit( pab2.image, pab2.rect)
-                    fenetre.blit( bot.image, bot.rect)
-                    fenetre.blit( ran.image, ran.rect)
-                    fenetre.blit( ale.image, ale.rect)
+            if pab.rect.colliderect(position_perso) or pab2.rect.colliderect(position_perso) or bot.rect.colliderect(position_perso) or ran.rect.colliderect(position_perso) or ale.rect.colliderect(position_perso) :
+                point_vie = point_vie - 1
+                if point_vie != 0:
+                    musique_blesse()
+                rand = randrange(1,14)
+                follower.rect= pygame.Rect(bot_x_y[rand])
+                pab.rect= pygame.Rect(bot_x_y[rand+1])
+                pab2.rect= pygame.Rect(bot_x_y[rand+2])
+                bot.rect = pygame.Rect(bot_x_y[rand+3])
+                ran.rect = pygame.Rect(bot_x_y[rand+4])
+                ale.rect = pygame.Rect(bot_x_y[rand+5])
+                fenetre.blit( follower.image,follower.rect)
+                fenetre.blit( pab.image, pab.rect)
+                fenetre.blit( pab2.image, pab2.rect)
+                fenetre.blit( bot.image, bot.rect)
+                fenetre.blit( ran.image, ran.rect)
+                fenetre.blit( ale.image, ale.rect)
 
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
 
 
             fenetre.blit(table, (0, 0))
@@ -289,30 +289,30 @@ def fonction_principal():
                 vie_coeur(point_vie,fenetre)
 
 
-                fenetre.blit( pab.image, pab.rect)
-                fenetre.blit( pab2.image, pab2.rect)
-                fenetre.blit( bot.image, bot.rect)
-                fenetre.blit( ran.image, ran.rect)
-                fenetre.blit( ale.image, ale.rect)
-                fenetre.blit(perso,position_perso)
-                fenetre.blit(aff_crono,(500,5))
-                fenetre.blit( follower.image, follower.rect)
+            fenetre.blit( pab.image, pab.rect)
+            fenetre.blit( pab2.image, pab2.rect)
+            fenetre.blit( bot.image, bot.rect)
+            fenetre.blit( ran.image, ran.rect)
+            fenetre.blit( ale.image, ale.rect)
+            fenetre.blit(perso,position_perso)
+            fenetre.blit(aff_crono,(500,5))
+            fenetre.blit( follower.image, follower.rect)
 
 
 
 
-                pab.update()
-                pab2.update()
-                bot.update()
-                ran.update()
-                ale.update()
+            pab.update()
+            pab2.update()
+            bot.update()
+            ran.update()
+            ale.update()
 
-                follower.update()
-                pygame.display.flip()
+            follower.update()
+            pygame.display.flip()
 
-                liste_crono=chrono(depart,black)
-                aff_crono = liste_crono[0]
-                conteur = liste_crono[1]
+            liste_crono=chrono(depart,black)
+            aff_crono = liste_crono[0]
+            conteur = liste_crono[1]
 
 
             for event in pygame.event.get():
