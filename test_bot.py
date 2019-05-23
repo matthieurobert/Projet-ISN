@@ -225,7 +225,7 @@ def fonction_principal():
 
     while continuer :
 
-        pygame.key.set_repeat(50,15)
+        pygame.key.set_repeat(100,15)
         while continuer2:
 
             for event in pygame.event.get():
@@ -430,7 +430,7 @@ def fonction_principal():
             
         save_score(conteur,nom_joueur)
         premier_score=lire_base_donner()  
-        variable_fonctionner_prog=game_over(conteur,fenetre,nom_joueur,premier_score)
+        game_over(conteur,fenetre,nom_joueur,premier_score)
         musique_fin()
         
         while continuer3:
