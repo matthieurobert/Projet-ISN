@@ -15,4 +15,4 @@ def save_score():
     score.close()
 
 save_score()
-afficher_text()
+
