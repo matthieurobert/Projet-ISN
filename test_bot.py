@@ -47,26 +47,24 @@ position_perso = perso.get_rect()
 
 class TBBot(pygame.sprite.Sprite):
 
-	def __init__(self):
+	def __init__(self):     #Attribution des variable de départ 
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load("Test_Matthieu/sprite2.png")
-		screen = pygame.display.get_surface()
-		self.area = screen.get_rect()
-		self.rect = pygame.Rect(0,400,50,50)
-		self.speed = [0,1]
+		self.image = pygame.image.load("Test_Matthieu/sprite2.png") #Attribution de l'image
+		self.rect = pygame.Rect(0,400,50,50)    #Création du rect du bot 
+		self.speed = [0,1]     #Création de la liste contenant la vitesse du bot 
 		self.update()
 
 
-	def update(self):
-		if self.rect.top < 0 or self.rect.bottom > 680:
-			self.speed[1] = -self.speed[1]
+	def update(self):      #Création de la fonction d'actualisation 
+		if self.rect.top < 0 or self.rect.bottom > 680: #Test pour savoir si le bot n'est pas sorti de l'écran
+			self.speed[1] = -self.speed[1]      #Changment du sens du bot 
 
-		for d in range (0,len(rekt_boîte)):
+		for d in range (0,len(rekt_boîte)):     #Parcour de la liste contenant les coordonnées des obstacles 
 
-			if self.rect.colliderect(rekt_boîte[d]):
-				self.speed[1] = -self.speed[1]
+			if self.rect.colliderect(rekt_boîte[d]):    #Test de collision avec un obstacle
+				self.speed[1] = -self.speed[1]      #Si collision changment de sens du bot 
 
-		self.rect = self.rect.move(self.speed)
+		self.rect = self.rect.move(self.speed)      #Changement de sens du bot 
 
 class LRBot(pygame.sprite.Sprite):
 
