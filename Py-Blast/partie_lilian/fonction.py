@@ -171,7 +171,10 @@ def lire_base_donner():
                 plus_grand_liste_classer = int(liste_classer[dernier_liste_sclasser][1])
                 if (chiffre_comparais > plus_grand_liste_classer) :
                         liste_classer.append(score_trier[j])
+                  
         premier_score = liste_classer[(len(liste_classer)-1)]
+             
+
         return(premier_score)
 
 def save_score(conteur,nom_joueur):

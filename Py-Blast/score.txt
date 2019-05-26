@@ -20,3 +20,7 @@ gqr 4
 hornisteur 66
 
 
+dg 58
+esgq 1
+horni 8
+dmfl 19
